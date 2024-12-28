@@ -1,0 +1,67 @@
+{
+  "project_info": {
+    "project_number": "256398666518",
+    "project_id": "easymeds-by-initlync",
+    "storage_bucket": "easymeds-by-initlync.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:256398666518:android:83bf3dee346f4c980a3e37",
+        "android_client_info": {
+          "package_name": "com.easymeds.driver"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCPnH363bwvTLAXSToAfWwWJ6HIiAtwYUQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:256398666518:android:50bf5d6618f727570a3e37",
+        "android_client_info": {
+          "package_name": "com.easymeds.ordermedicineorder"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCPnH363bwvTLAXSToAfWwWJ6HIiAtwYUQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:256398666518:android:5131631adb6e761d0a3e37",
+        "android_client_info": {
+          "package_name": "com.easymeds.store"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCPnH363bwvTLAXSToAfWwWJ6HIiAtwYUQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
