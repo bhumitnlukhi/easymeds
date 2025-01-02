@@ -8,11 +8,11 @@ class CategoryController extends GetxController implements GetxService {
   final CategoryServiceInterface categoryServiceInterface;
   CategoryController({required this.categoryServiceInterface});
 
-  List<CategoryModel>? _categoryList;
-  List<CategoryModel>? get categoryList => _categoryList;
+  List<Category>? _categoryList;
+  List<Category>? get categoryList => _categoryList;
 
-  List<CategoryModel>? _subCategoryList;
-  List<CategoryModel>? get subCategoryList => _subCategoryList;
+  List<Category>? _subCategoryList;
+  List<Category>? get subCategoryList => _subCategoryList;
 
   List<Item>? _categoryItemList;
   List<Item>? get categoryItemList => _categoryItemList;
@@ -56,14 +56,32 @@ class CategoryController extends GetxController implements GetxService {
   int _offset = 1;
   int get offset => _offset;
 
-  Future<void> getCategoryList(bool reload, {bool allCategory = false}) async {
-    if(_categoryList == null || reload) {
+  CartCheckResponseModel? categoryResponse;
+
+  Future<void> getCategoryList(bool reload, {bool allCategory = false,int offset = 1}) async {
+    if(reload) {
+      categoryResponse = null;
       _categoryList = null;
-      List<CategoryModel>? categoryList = await categoryServiceInterface.getCategoryList(allCategory);
-      if (categoryList != null) {
-        _categoryList = [];
-        _interestSelectedList = [];
-        _categoryList!.addAll(categoryList);
+      update();
+    }
+    CartCheckResponseModel? categoryResponseTemp =  await categoryServiceInterface.getCategoryList(allCategory,offset);
+    if (categoryResponseTemp != null) {
+      if (offset == 1) {
+        categoryResponse = categoryResponseTemp;
+        List<Category>? categoryList = categoryResponse?.categories;
+        if (categoryList != null) {
+          _categoryList = [];
+          _interestSelectedList = [];
+          _categoryList!.addAll(categoryList);
+          for(int i = 0; i < _categoryList!.length; i++) {
+            _interestSelectedList!.add(false);
+          }
+        }
+      }else {
+        categoryResponse!.totalSize = categoryResponseTemp.totalSize;
+        categoryResponse!.offset = categoryResponseTemp.offset;
+        //categoryResponse!.categories!.addAll(categoryResponseTemp.categories!);
+        _categoryList!.addAll(categoryResponseTemp.categories!);
         for(int i = 0; i < _categoryList!.length; i++) {
           _interestSelectedList!.add(false);
         }
@@ -76,10 +94,10 @@ class CategoryController extends GetxController implements GetxService {
     _subCategoryIndex = 0;
     _subCategoryList = null;
     _categoryItemList = null;
-    List<CategoryModel>? subCategoryList = await categoryServiceInterface.getSubCategoryList(categoryID);
+    List<Category>? subCategoryList = await categoryServiceInterface.getSubCategoryList(categoryID);
     if (subCategoryList != null) {
       _subCategoryList= [];
-      _subCategoryList!.add(CategoryModel(id: int.parse(categoryID!), name: 'all'.tr));
+      _subCategoryList!.add(Category(id: int.parse(categoryID!), name: 'all'.tr));
       _subCategoryList!.addAll(subCategoryList);
       getCategoryItemList(categoryID, 1, 'all', false);
     }

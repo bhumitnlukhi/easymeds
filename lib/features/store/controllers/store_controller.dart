@@ -57,8 +57,8 @@ class StoreController extends GetxController implements GetxService {
   int _categoryIndex = 0;
   int get categoryIndex => _categoryIndex;
 
-  List<CategoryModel>? _categoryList;
-  List<CategoryModel>? get categoryList => _categoryList;
+  List<Category>? _categoryList;
+  List<Category>? get categoryList => _categoryList;
 
   bool _isLoading = false;
   bool get isLoading => _isLoading;
@@ -292,7 +292,7 @@ class StoreController extends GetxController implements GetxService {
   void setCategoryList() {
     if(Get.find<CategoryController>().categoryList != null && _store != null) {
       _categoryList = [];
-      _categoryList!.add(CategoryModel(id: 0, name: 'all'.tr));
+      _categoryList!.add(Category(id: 0, name: 'all'.tr));
       for (var category in Get.find<CategoryController>().categoryList!) {
         if(_store!.categoryIds!.contains(category.id)) {
           _categoryList!.add(category);

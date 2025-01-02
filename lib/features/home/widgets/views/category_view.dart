@@ -83,7 +83,7 @@ class CategoryView extends StatelessWidget {
                                         ),
                                         child: Center(
                                           child: Text(
-                                            '+${categoryController.categoryList!.length - 10}',
+                                            '+${categoryController.categoryResponse?.totalSize ?? 11 - 10}',
                                             style: robotoMedium.copyWith(fontSize: Dimensions.fontSizeExtraLarge, color: Theme.of(context).cardColor),
                                             maxLines: 2, overflow: TextOverflow.ellipsis, textAlign: TextAlign.center,
                                           ),
@@ -218,7 +218,7 @@ class PharmacyCategoryView extends StatelessWidget {
                             ),
                             child: Center(
                               child: Text(
-                                '+${categoryController.categoryList!.length - 10}',
+                                '+${categoryController.categoryResponse?.totalSize ?? 11 - 10}',
                                 style: robotoMedium.copyWith(fontSize: Dimensions.fontSizeExtraLarge, color: Theme.of(context).cardColor),
                                 maxLines: 2, overflow: TextOverflow.ellipsis, textAlign: TextAlign.center,
                               ),
@@ -309,7 +309,7 @@ class FoodCategoryView extends StatelessWidget {
                               ),
                               child: Center(
                                 child: Text(
-                                  '+${categoryController.categoryList!.length - 10}',
+                                  '+${categoryController.categoryResponse?.totalSize ?? 11 - 10}',
                                   style: robotoMedium.copyWith(fontSize: Dimensions.fontSizeExtraLarge, color: Theme.of(context).cardColor),
                                   maxLines: 2, overflow: TextOverflow.ellipsis, textAlign: TextAlign.center,
                                 ),

@@ -10,12 +10,12 @@ class CategoryService implements CategoryServiceInterface {
   CategoryService({required this.categoryRepositoryInterface});
 
   @override
-  Future<List<CategoryModel>?> getCategoryList(bool allCategory) async {
-    return await categoryRepositoryInterface.getList(allCategory: allCategory, categoryList: true);
+  Future<CartCheckResponseModel> getCategoryList(bool allCategory,int offset) async {
+    return await categoryRepositoryInterface.getList(allCategory: allCategory, categoryList: true,offset: offset);
   }
 
   @override
-  Future<List<CategoryModel>?> getSubCategoryList(String? parentID) async {
+  Future<List<Category>?> getSubCategoryList(String? parentID) async {
     return await categoryRepositoryInterface.getList(id: parentID, subCategoryList: true);
   }
 

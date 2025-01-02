@@ -830,7 +830,7 @@ class SliverDelegate extends SliverPersistentHeaderDelegate {
 }
 
 class CategoryProduct {
-  CategoryModel category;
+  Category category;
   List<Item> products;
   CategoryProduct(this.category, this.products);
 }

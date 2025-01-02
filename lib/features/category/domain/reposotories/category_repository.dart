@@ -15,7 +15,7 @@ class CategoryRepository implements CategoryRepositoryInterface {
   Future getList({int? offset, bool categoryList = false, bool subCategoryList = false, bool categoryItemList = false, bool categoryStoreList = false,
     bool? allCategory, String? id, String? type}) async {
     if (categoryList) {
-      return await _getCategoryList(allCategory!);
+      return await _getCategoryList(allCategory!,offset ?? 1);
     } else if (subCategoryList) {
       return await _getSubCategoryList(id);
     } else if (categoryItemList) {
@@ -25,26 +25,28 @@ class CategoryRepository implements CategoryRepositoryInterface {
     }
   }
 
-  Future<List<CategoryModel>?> _getCategoryList(bool allCategory) async {
-    List<CategoryModel>? categoryList;
-    Response response = await apiClient.getData(AppConstants.categoryUri, headers: allCategory ? {
+  Future<CartCheckResponseModel> _getCategoryList(bool allCategory, int offset) async {
+    CartCheckResponseModel categoryResponse = CartCheckResponseModel();
+    List<Category>? categoryList;
+    Response response = await apiClient.getData('${AppConstants.categoryUri}?limit=19&offset=$offset', headers: allCategory ? {
       'Content-Type': 'application/json; charset=UTF-8',
       AppConstants.localizationKey: Get.find<LocalizationController>().locale.languageCode} : null);
     if (response.statusCode == 200) {
       categoryList = [];
-      response.body.forEach((category) {
-        categoryList!.add(CategoryModel.fromJson(category));
+      categoryResponse = CartCheckResponseModel.fromJson(response.body);
+      response.body['categories'].forEach((category) {
+        categoryList!.add(Category.fromJson(category));
       });
     }
-    return categoryList;
+    return categoryResponse;
   }
 
-  Future<List<CategoryModel>?> _getSubCategoryList(String? parentID) async {
-    List<CategoryModel>? subCategoryList;
+  Future<List<Category>?> _getSubCategoryList(String? parentID) async {
+    List<Category>? subCategoryList;
     Response response = await apiClient.getData('${AppConstants.subCategoryUri}$parentID');
     if (response.statusCode == 200) {
       subCategoryList= [];
-      response.body.forEach((category) => subCategoryList!.add(CategoryModel.fromJson(category)));
+      response.body.forEach((category) => subCategoryList!.add(Category.fromJson(category)));
     }
     return subCategoryList;
   }
