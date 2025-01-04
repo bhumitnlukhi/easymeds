@@ -28,7 +28,7 @@ class CategoryRepository implements CategoryRepositoryInterface {
   Future<CartCheckResponseModel> _getCategoryList(bool allCategory, int offset) async {
     CartCheckResponseModel categoryResponse = CartCheckResponseModel();
     List<Category>? categoryList;
-    Response response = await apiClient.getData('${AppConstants.categoryUri}?limit=11&offset=$offset', headers: allCategory ? {
+    Response response = await apiClient.getData('${AppConstants.categoryUri}?limit=9&offset=$offset', headers: allCategory ? {
       'Content-Type': 'application/json; charset=UTF-8',
       AppConstants.localizationKey: Get.find<LocalizationController>().locale.languageCode} : null);
     if (response.statusCode == 200) {

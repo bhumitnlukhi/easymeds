@@ -35,7 +35,7 @@ class CategoryView extends StatelessWidget {
                     height: 158,
                     child: categoryController.categoryList != null ? ListView.builder(
                       controller: scrollController,
-                      itemCount: categoryController.categoryList!.length > 10 ? 10 : categoryController.categoryList!.length,
+                      itemCount: categoryController.categoryList!.length > 8 ? 8 : categoryController.categoryList!.length,
                       padding: const EdgeInsets.only(left: Dimensions.paddingSizeSmall, top: Dimensions.paddingSizeDefault),
                       physics: const BouncingScrollPhysics(),
                       scrollDirection: Axis.horizontal,
@@ -44,7 +44,7 @@ class CategoryView extends StatelessWidget {
                           padding: const EdgeInsets.only(bottom: Dimensions.paddingSizeDefault, right: Dimensions.paddingSizeSmall, top: Dimensions.paddingSizeDefault),
                           child: InkWell(
                             onTap: () {
-                              if(index == 9 && categoryController.categoryList!.length > 10) {
+                              if(index == 7 && categoryController.categoryList!.length > 8) {
                                 Get.toNamed(RouteHelper.getCategoryRoute());
                               } else {
                                 Get.toNamed(RouteHelper.getCategoryItemRoute(
@@ -66,7 +66,7 @@ class CategoryView extends StatelessWidget {
                                       ),
                                     ),
 
-                                    (index == 9 && categoryController.categoryList!.length > 10) ? Positioned(
+                                    (index == 7 && categoryController.categoryList!.length > 8) ? Positioned(
                                       right: 0, left: 0, top: 0, bottom: 0,
                                       child: Container(
                                         decoration: BoxDecoration(
@@ -83,7 +83,7 @@ class CategoryView extends StatelessWidget {
                                         ),
                                         child: Center(
                                           child: Text(
-                                            '+${categoryController.categoryResponse?.totalSize ?? 11 - 10}',
+                                            '+${categoryController.categoryResponse?.totalSize ?? 9 - 8}',
                                             style: robotoMedium.copyWith(fontSize: Dimensions.fontSizeExtraLarge, color: Theme.of(context).cardColor),
                                             maxLines: 2, overflow: TextOverflow.ellipsis, textAlign: TextAlign.center,
                                           ),
@@ -98,8 +98,8 @@ class CategoryView extends StatelessWidget {
                                 Padding(
                                   padding: EdgeInsets.only(right: index == 0 ? Dimensions.paddingSizeExtraSmall : 0),
                                   child: Text(
-                                    (index == 9 && categoryController.categoryList!.length > 10) ? 'see_all'.tr : categoryController.categoryList![index].name!,
-                                    style: robotoMedium.copyWith(fontSize: 11, color: (index == 9 && categoryController.categoryList!.length > 10) ? Theme.of(context).primaryColor : Theme.of(context).textTheme.bodyMedium!.color),
+                                    (index == 7 && categoryController.categoryList!.length > 8) ? 'see_all'.tr : categoryController.categoryList![index].name!,
+                                    style: robotoMedium.copyWith(fontSize: 11, color: (index == 7 && categoryController.categoryList!.length > 8) ? Theme.of(context).primaryColor : Theme.of(context).textTheme.bodyMedium!.color),
                                     maxLines: Get.find<LocalizationController>().isLtr ? 2 : 1, overflow: TextOverflow.ellipsis, textAlign: TextAlign.center,
                                   ),
                                 ),
@@ -160,13 +160,13 @@ class PharmacyCategoryView extends StatelessWidget {
           shrinkWrap: true,
           scrollDirection: Axis.horizontal,
           padding: const EdgeInsets.only(left: Dimensions.paddingSizeDefault, top: Dimensions.paddingSizeDefault),
-          itemCount: categoryController.categoryList!.length > 10 ? 10 : categoryController.categoryList!.length,
+          itemCount: categoryController.categoryList!.length > 8 ? 8 : categoryController.categoryList!.length,
           itemBuilder: (context, index) {
             return Padding(
               padding: const EdgeInsets.only(bottom: Dimensions.paddingSizeDefault, right: Dimensions.paddingSizeSmall, top: Dimensions.paddingSizeDefault),
               child: InkWell(
                 onTap: () {
-                  if(index == 9 && categoryController.categoryList!.length > 10) {
+                  if(index == 7 && categoryController.categoryList!.length > 8) {
                     Get.toNamed(RouteHelper.getCategoryRoute());
                   } else {
                     Get.toNamed(RouteHelper.getCategoryItemRoute(
@@ -201,7 +201,7 @@ class PharmacyCategoryView extends StatelessWidget {
                           ),
                         ),
 
-                        (index == 9 && categoryController.categoryList!.length > 10) ? Positioned(
+                        (index == 7 && categoryController.categoryList!.length > 8) ? Positioned(
                           right: 0, left: 0, top: 0, bottom: 0,
                           child: Container(
                             decoration: BoxDecoration(
@@ -218,7 +218,7 @@ class PharmacyCategoryView extends StatelessWidget {
                             ),
                             child: Center(
                               child: Text(
-                                '+${categoryController.categoryResponse?.totalSize ?? 11 - 10}',
+                                '+${categoryController.categoryResponse?.totalSize ?? 9 - 8}',
                                 style: robotoMedium.copyWith(fontSize: Dimensions.fontSizeExtraLarge, color: Theme.of(context).cardColor),
                                 maxLines: 2, overflow: TextOverflow.ellipsis, textAlign: TextAlign.center,
                               ),
@@ -230,9 +230,9 @@ class PharmacyCategoryView extends StatelessWidget {
                     const SizedBox(height: Dimensions.paddingSizeSmall),
 
                     Expanded(child: Text(
-                      (index == 9 && categoryController.categoryList!.length > 10) ? 'see_all'.tr :  categoryController.categoryList![index].name!,
+                      (index == 7 && categoryController.categoryList!.length > 8) ? 'see_all'.tr :  categoryController.categoryList![index].name!,
                       style: robotoMedium.copyWith(fontSize: Dimensions.fontSizeSmall,
-                      color: (index == 9 && categoryController.categoryList!.length > 10) ? Theme.of(context).primaryColor : Theme.of(context).textTheme.bodyMedium!.color),
+                      color: (index == 7 && categoryController.categoryList!.length > 8) ? Theme.of(context).primaryColor : Theme.of(context).textTheme.bodyMedium!.color),
                       maxLines: 2, overflow: TextOverflow.ellipsis, textAlign: TextAlign.center,
                     )),
                   ]),
@@ -263,13 +263,13 @@ class FoodCategoryView extends StatelessWidget {
             shrinkWrap: true,
             scrollDirection: Axis.horizontal,
             padding: const EdgeInsets.only(left: Dimensions.paddingSizeDefault, top: Dimensions.paddingSizeDefault),
-            itemCount: categoryController.categoryList!.length > 10 ? 10 : categoryController.categoryList!.length,
+            itemCount: categoryController.categoryList!.length > 8 ? 8 : categoryController.categoryList!.length,
             itemBuilder: (context, index) {
               return Padding(
                 padding: const EdgeInsets.only(bottom: Dimensions.paddingSizeDefault, right: Dimensions.paddingSizeDefault, top: Dimensions.paddingSizeDefault),
                 child: InkWell(
                   onTap: () {
-                    if(index == 9 && categoryController.categoryList!.length > 10) {
+                    if(index == 7 && categoryController.categoryList!.length > 8) {
                       Get.toNamed(RouteHelper.getCategoryRoute());
                     } else {
                       Get.toNamed(RouteHelper.getCategoryItemRoute(
@@ -292,7 +292,7 @@ class FoodCategoryView extends StatelessWidget {
                             ),
                           ),
 
-                          (index == 9 && categoryController.categoryList!.length > 10) ? Positioned(
+                          (index == 7 && categoryController.categoryList!.length > 8) ? Positioned(
                             right: 0, left: 0, top: 0, bottom: 0,
                             child: Container(
                               decoration: BoxDecoration(
@@ -309,7 +309,7 @@ class FoodCategoryView extends StatelessWidget {
                               ),
                               child: Center(
                                 child: Text(
-                                  '+${categoryController.categoryResponse?.totalSize ?? 11 - 10}',
+                                  '+${categoryController.categoryResponse?.totalSize ?? 9 - 8}',
                                   style: robotoMedium.copyWith(fontSize: Dimensions.fontSizeExtraLarge, color: Theme.of(context).cardColor),
                                   maxLines: 2, overflow: TextOverflow.ellipsis, textAlign: TextAlign.center,
                                 ),
@@ -321,8 +321,8 @@ class FoodCategoryView extends StatelessWidget {
                       const SizedBox(height: Dimensions.paddingSizeSmall),
 
                       Expanded(child: Text(
-                        (index == 9 && categoryController.categoryList!.length > 10) ?  'see_all'.tr : categoryController.categoryList![index].name ?? '',
-                        style: robotoMedium.copyWith(fontSize: Dimensions.fontSizeSmall, color: (index == 9 && categoryController.categoryList!.length > 10) ? Theme.of(context).primaryColor : Theme.of(context).textTheme.bodyMedium!.color),
+                        (index == 7 && categoryController.categoryList!.length > 8) ?  'see_all'.tr : categoryController.categoryList![index].name ?? '',
+                        style: robotoMedium.copyWith(fontSize: Dimensions.fontSizeSmall, color: (index == 7 && categoryController.categoryList!.length > 8) ? Theme.of(context).primaryColor : Theme.of(context).textTheme.bodyMedium!.color),
                         maxLines: 2, overflow: TextOverflow.ellipsis, textAlign: TextAlign.center,
                       )),
                     ]),
