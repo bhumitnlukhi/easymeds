@@ -55,7 +55,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
                   physics: const NeverScrollableScrollPhysics(),
                   shrinkWrap: true,
                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: ResponsiveHelper.isDesktop(context) ? 6 : ResponsiveHelper.isTab(context) ? 4 : 3,
+                    crossAxisCount: ResponsiveHelper.isDesktop(context) ? 6 : ResponsiveHelper.isTab(context) ? 4 : 2,
                     childAspectRatio: (1/1),
                     mainAxisSpacing: Dimensions.paddingSizeSmall,
                     crossAxisSpacing: Dimensions.paddingSizeSmall,
