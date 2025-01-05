@@ -8,6 +8,7 @@ import 'package:sixam_mart/features/home/widgets/views/just_for_you_view.dart';
 import 'package:sixam_mart/features/home/widgets/views/middle_section_banner_view.dart';
 import 'package:sixam_mart/features/home/widgets/views/new_on_mart_view.dart';
 import 'package:sixam_mart/features/home/widgets/views/promotional_banner_view.dart';
+import 'package:sixam_mart/features/home/widgets/views/store_wise_product_list.dart';
 import 'package:sixam_mart/features/home/widgets/views/visit_again_view.dart';
 import 'package:sixam_mart/features/home/widgets/banner_view.dart';
 import 'package:sixam_mart/features/home/widgets/views/category_view.dart';
@@ -39,11 +40,13 @@ class PharmacyHomeScreen extends StatelessWidget {
       const ProductWithCategoriesView(),
       const HighlightWidget(),
       const MiddleSectionBannerView(),
-      const BestStoreNearbyView(),
+     // const BestStoreNearbyView(),
+      const CategoriesWiseProductView(),
       const JustForYouView(),
-      const NewOnMartView(isShop: false, isPharmacy: true, isNewStore: true),
+    //  const NewOnMartView(isShop: false, isPharmacy: true, isNewStore: true),
       const CommonConditionView(),
-      const PromotionalBannerView(),
+      const SizedBox(height: 50,)
+     // const PromotionalBannerView(),
 
     ]);
   }

@@ -1,4 +1,5 @@
 import 'package:flutter/foundation.dart';
+import 'package:sixam_mart/common/widgets/paginated_list_view.dart';
 import 'package:sixam_mart/features/category/controllers/category_controller.dart';
 import 'package:sixam_mart/features/splash/controllers/splash_controller.dart';
 import 'package:sixam_mart/features/item/domain/models/item_model.dart';
@@ -40,7 +41,7 @@ class CategoryItemScreenState extends State<CategoryItemScreen> with TickerProvi
       if (scrollController.position.pixels == scrollController.position.maxScrollExtent
           && Get.find<CategoryController>().categoryItemList != null
           && !Get.find<CategoryController>().isLoading) {
-        int pageSize = (Get.find<CategoryController>().pageSize! / 10).ceil();
+        /*int pageSize = (Get.find<CategoryController>().pageSize! / 10).ceil();
         if (Get.find<CategoryController>().offset < pageSize) {
           if (kDebugMode) {
             print('end of the page');
@@ -51,7 +52,7 @@ class CategoryItemScreenState extends State<CategoryItemScreen> with TickerProvi
                 : Get.find<CategoryController>().subCategoryList![Get.find<CategoryController>().subCategoryIndex].id.toString(),
             Get.find<CategoryController>().offset+1, Get.find<CategoryController>().type, false,
           );
-        }
+        }*/
       }
     });
     storeScrollController.addListener(() {
@@ -214,7 +215,7 @@ class CategoryItemScreenState extends State<CategoryItemScreen> with TickerProvi
                 ),
               )) : const SizedBox(),
 
-              Center(child: Container(
+              /*Center(child: Container(
                 width: Dimensions.webMaxWidth,
                 color: Theme.of(context).cardColor,
                 child: TabBar(
@@ -231,7 +232,7 @@ class CategoryItemScreenState extends State<CategoryItemScreen> with TickerProvi
                         ? 'restaurants'.tr : 'stores'.tr),
                   ],
                 ),
-              )),
+              )),*/
 
 
               Expanded(child: NotificationListener(
@@ -268,9 +269,24 @@ class CategoryItemScreenState extends State<CategoryItemScreen> with TickerProvi
                   children: [
                     SingleChildScrollView(
                       controller: scrollController,
-                      child: ItemsView(
-                        isStore: false, items: item, stores: null, noDataText: 'no_category_item_found'.tr,
-                      ),
+                      child: PaginatedListView(
+                        scrollController: scrollController,
+                        onPaginate: (int? offset) {
+                          catController.showBottomLoader();
+                          catController.getCategoryItemList(
+                            catController.subCategoryIndex == 0 ? widget.categoryID
+                                : catController.subCategoryList![Get.find<CategoryController>().subCategoryIndex].id.toString(),
+                            offset!, catController.type, false,
+                          );
+                        },
+                        totalSize: catController.pageSize,
+                        viewButton: !catController.isLoading,
+                        offset: catController.offset,
+                        //enabledPagination: true,
+                        itemView: ItemsView(
+                          isStore: false, items: item, stores: null, noDataText: 'no_category_item_found'.tr,
+                        ),
+                      )
                     ),
                     SingleChildScrollView(
                       controller: storeScrollController,

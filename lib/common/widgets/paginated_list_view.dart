@@ -12,8 +12,9 @@ class PaginatedListView extends StatefulWidget {
   final Widget itemView;
   final bool enabledPagination;
   final bool reverse;
+  final bool viewButton;
   const PaginatedListView({super.key, required this.scrollController, required this.onPaginate, required this.totalSize,
-    required this.offset, required this.itemView, this.enabledPagination = true, this.reverse = false,
+    required this.offset, required this.itemView, this.enabledPagination = true, this.reverse = false, this.viewButton = false
   });
 
   @override
@@ -35,7 +36,7 @@ class _PaginatedListViewState extends State<PaginatedListView> {
     widget.scrollController.addListener(() {
       if (widget.scrollController.position.pixels == widget.scrollController.position.maxScrollExtent
           && widget.totalSize != null && !_isLoading && widget.enabledPagination) {
-        if(mounted && !ResponsiveHelper.isDesktop(context)) {
+        if(mounted && !ResponsiveHelper.isDesktop(context) && !widget.viewButton) {
           _paginate();
         }
       }
@@ -80,8 +81,18 @@ class _PaginatedListViewState extends State<PaginatedListView> {
       widget.reverse ? const SizedBox() : widget.itemView,
 
       (ResponsiveHelper.isDesktop(context) && (widget.totalSize == null || _offset! >= (widget.totalSize! / 10).ceil() || _offsetList.contains(_offset!+1))) ? const SizedBox() : Center(child: Padding(
-        padding: (_isLoading || ResponsiveHelper.isDesktop(context)) ? const EdgeInsets.all(Dimensions.paddingSizeSmall) : EdgeInsets.zero,
-        child: _isLoading ? const CircularProgressIndicator() : (ResponsiveHelper.isDesktop(context) && widget.totalSize != null) ? InkWell(
+        padding: (_isLoading || ResponsiveHelper.isDesktop(context) || widget.viewButton) ? const EdgeInsets.all(Dimensions.paddingSizeSmall) : EdgeInsets.zero,
+        child: _isLoading  ? const CircularProgressIndicator() : (ResponsiveHelper.isDesktop(context) && widget.totalSize != null) ? InkWell(
+          onTap: _paginate,
+          child: Container(
+            padding: const EdgeInsets.symmetric(vertical: Dimensions.paddingSizeSmall, horizontal: Dimensions.paddingSizeLarge),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(Dimensions.radiusSmall),
+              color: Theme.of(context).primaryColor,
+            ),
+            child: Text('view_more'.tr, style: robotoMedium.copyWith(fontSize: Dimensions.fontSizeLarge, color: Colors.white)),
+          ),
+        ) :  widget.viewButton ? InkWell(
           onTap: _paginate,
           child: Container(
             padding: const EdgeInsets.symmetric(vertical: Dimensions.paddingSizeSmall, horizontal: Dimensions.paddingSizeLarge),

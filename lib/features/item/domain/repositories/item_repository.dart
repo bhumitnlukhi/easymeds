@@ -50,7 +50,7 @@ class ItemRepository implements ItemRepositoryInterface {
 
   Future<List<Item>?> _getConditionsWiseItems(int id) async {
     List<Item>? conditionWiseProduct;
-    Response response = await apiClient.getData('${AppConstants.conditionWiseItemUri}$id?limit=15&offset=1');
+    Response response = await apiClient.getData('${AppConstants.conditionWiseItemUri}$id?limit=30&offset=1');
     if (response.statusCode == 200) {
       conditionWiseProduct = [];
       conditionWiseProduct.addAll(ItemModel.fromJson(response.body).items!);

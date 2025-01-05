@@ -64,15 +64,15 @@ class HomeScreen extends StatefulWidget {
       Get.find<BannerController>().getPromotionalBannerList(reload);
       Get.find<ItemController>().getDiscountedItemList(reload, false, 'all');
       Get.find<CategoryController>().getCategoryList(reload);
-      Get.find<StoreController>().getPopularStoreList(reload, 'all', false);
+      //Get.find<StoreController>().getPopularStoreList(reload, 'all', false);
       Get.find<CampaignController>().getBasicCampaignList(reload);
       Get.find<CampaignController>().getItemCampaignList(reload);
       Get.find<ItemController>().getPopularItemList(reload, 'all', false);
-      Get.find<StoreController>().getLatestStoreList(reload, 'all', false);
+      //Get.find<StoreController>().getLatestStoreList(reload, 'all', false);
       Get.find<ItemController>().getReviewedItemList(reload, 'all', false);
       Get.find<ItemController>().getRecommendedItemList(reload, 'all', false);
-      Get.find<StoreController>().getStoreList(1, reload);
-      Get.find<StoreController>().getRecommendedStoreList();
+     // Get.find<StoreController>().getStoreList(1, reload);
+     // Get.find<StoreController>().getRecommendedStoreList();
       Get.find<AdvertisementController>().getAdvertisementList();
     }
     if(AuthHelper.isLoggedIn()) {
@@ -84,7 +84,7 @@ class HomeScreen extends StatefulWidget {
     Get.find<SplashController>().getModules();
     if(Get.find<SplashController>().module == null && Get.find<SplashController>().configModel!.module == null) {
       Get.find<BannerController>().getFeaturedBanner();
-      Get.find<StoreController>().getFeaturedStoreList();
+    //  Get.find<StoreController>().getFeaturedStoreList();
       if(AuthHelper.isLoggedIn()) {
         Get.find<AddressController>().getAddressList();
       }
@@ -94,7 +94,7 @@ class HomeScreen extends StatefulWidget {
     }
     if(Get.find<SplashController>().module != null && Get.find<SplashController>().module!.moduleType.toString() == AppConstants.pharmacy) {
       Get.find<ItemController>().getBasicMedicine(reload, false);
-      Get.find<StoreController>().getFeaturedStoreList();
+      //Get.find<StoreController>().getFeaturedStoreList();
       await Get.find<ItemController>().getCommonConditions(false);
       if(Get.find<ItemController>().commonConditions!.isNotEmpty) {
         Get.find<ItemController>().getConditionsWiseItem(Get.find<ItemController>().commonConditions![0].id!, false);
@@ -204,13 +204,13 @@ class _HomeScreenState extends State<HomeScreen> {
                   await Get.find<BannerController>().getPromotionalBannerList(true);
                   await Get.find<ItemController>().getDiscountedItemList(true, false, 'all');
                   await Get.find<CategoryController>().getCategoryList(true);
-                  await Get.find<StoreController>().getPopularStoreList(true, 'all', false);
+                 // await Get.find<StoreController>().getPopularStoreList(true, 'all', false);
                   await Get.find<CampaignController>().getItemCampaignList(true);
                   Get.find<CampaignController>().getBasicCampaignList(true);
                   await Get.find<ItemController>().getPopularItemList(true, 'all', false);
-                  await Get.find<StoreController>().getLatestStoreList(true, 'all', false);
+                //  await Get.find<StoreController>().getLatestStoreList(true, 'all', false);
                   await Get.find<ItemController>().getReviewedItemList(true, 'all', false);
-                  await Get.find<StoreController>().getStoreList(1, true);
+                 // await Get.find<StoreController>().getStoreList(1, true);
                   Get.find<AdvertisementController>().getAdvertisementList();
                   if (AuthHelper.isLoggedIn()) {
                     await Get.find<ProfileController>().getUserInfo();
@@ -232,7 +232,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   if (AuthHelper.isLoggedIn()) {
                     await Get.find<AddressController>().getAddressList();
                   }
-                  await Get.find<StoreController>().getFeaturedStoreList();
+                  //await Get.find<StoreController>().getFeaturedStoreList();
                 }
                 splashController.setRefreshing(false);
               },
@@ -364,7 +364,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     )),
                   ),
 
-                  !showMobileModule ? SliverPersistentHeader(
+                  /*!showMobileModule ? SliverPersistentHeader(
                     key: _headerKey,
                     pinned: true,
                     delegate: SliverDelegate(
@@ -374,8 +374,9 @@ class _HomeScreenState extends State<HomeScreen> {
                       },
                       child: const AllStoreFilterWidget(),
                     ),
-                  ) : const SliverToBoxAdapter(),
+                  ) : const SliverToBoxAdapter(),*/
 
+/*
                   SliverToBoxAdapter(child: !showMobileModule ? Center(child: GetBuilder<StoreController>(builder: (storeController) {
                     return Padding(
                       padding: EdgeInsets.only(bottom: ResponsiveHelper.isDesktop(context) ? 0 : 100),
@@ -397,6 +398,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                     );
                   }),) : const SizedBox()),
+*/
 
                 ],
               ),

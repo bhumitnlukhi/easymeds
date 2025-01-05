@@ -533,9 +533,37 @@ class _ItemDetailsScreenState extends State<ItemDetailsScreen> {
                                                         height: Dimensions
                                                             .paddingSizeExtraSmall),
                                                     Text(
+                                                      itemController
+                                                          .item!.description!,
+                                                      style: robotoRegular,
+                                                      maxLines:
+                                                      itemController.isReadMore
+                                                          ? 10
+                                                          : 2,
+                                                      overflow:
+                                                      TextOverflow.ellipsis,
+                                                    ),
+                                                    itemController
+                                                        .item!
+                                                        .description!
+                                                        .length >
+                                                        150
+                                                        ? InkWell(
+                                                      onTap: () =>
+                                                          itemController
+                                                              .changeReadMore(),
+                                                      child: Text(
                                                         itemController
-                                                            .item!.description!,
-                                                        style: robotoRegular),
+                                                            .isReadMore
+                                                            ? "read_less".tr
+                                                            : "read_more".tr,
+                                                        style: robotoRegular.copyWith(
+                                                            color: Theme.of(
+                                                                context)
+                                                                .primaryColor),
+                                                      ),
+                                                    )
+                                                        : const SizedBox(),
                                                     const SizedBox(
                                                         height: Dimensions
                                                             .paddingSizeLarge),
@@ -593,9 +621,33 @@ class _ItemDetailsScreenState extends State<ItemDetailsScreen> {
                                                   height: Dimensions
                                                       .paddingSizeExtraSmall),
                                               Text(
+                                                itemController.item!.uses!,
+                                                style: robotoRegular,
+                                                maxLines:
+                                                itemController.isUsesReadMore
+                                                    ? 10
+                                                    : 2,
+                                                overflow:
+                                                TextOverflow.ellipsis,
+                                              ),
+                                              itemController.item!.uses!
+                                                  .length >
+                                                  150
+                                                  ? InkWell(
+                                                onTap: () => itemController
+                                                    .changeUsesReadMore(),
+                                                child: Text(
                                                   itemController
-                                                      .item!.uses!,
-                                                  style: robotoRegular),
+                                                      .isUsesReadMore
+                                                      ? "read_less".tr
+                                                      : "read_more".tr,
+                                                  style: robotoRegular.copyWith(
+                                                      color: Theme.of(
+                                                          context)
+                                                          .primaryColor),
+                                                ),
+                                              )
+                                                  : const SizedBox(),
                                               const SizedBox(
                                                   height: Dimensions
                                                       .paddingSizeLarge),
@@ -620,9 +672,36 @@ class _ItemDetailsScreenState extends State<ItemDetailsScreen> {
                                                   height: Dimensions
                                                       .paddingSizeExtraSmall),
                                               Text(
+                                                itemController
+                                                    .item!.directionsForUse!,
+                                                style: robotoRegular,
+                                                maxLines:
+                                                itemController.isDirectionReadMore
+                                                    ? 10
+                                                    : 2,
+                                                overflow:
+                                                TextOverflow.ellipsis,
+                                              ),
+                                              itemController
+                                                  .item!
+                                                  .directionsForUse!
+                                                  .length >
+                                                  150
+                                                  ? InkWell(
+                                                onTap: () => itemController
+                                                    .changeDirectionUseReadMore(),
+                                                child: Text(
                                                   itemController
-                                                      .item!.directionsForUse!,
-                                                  style: robotoRegular),
+                                                      .isDirectionReadMore
+                                                      ? "read_less".tr
+                                                      : "read_more".tr,
+                                                  style: robotoRegular.copyWith(
+                                                      color: Theme.of(
+                                                          context)
+                                                          .primaryColor),
+                                                ),
+                                              )
+                                                  : const SizedBox(),
                                               const SizedBox(
                                                   height: Dimensions
                                                       .paddingSizeLarge),
@@ -648,9 +727,34 @@ class _ItemDetailsScreenState extends State<ItemDetailsScreen> {
                                                   height: Dimensions
                                                       .paddingSizeExtraSmall),
                                               Text(
+                                                itemController
+                                                    .item!.sideEffect!,
+                                                style: robotoRegular,
+                                                maxLines:
+                                                itemController.isSideReadMore
+                                                    ? 10
+                                                    : 2,
+                                                overflow:
+                                                TextOverflow.ellipsis,
+                                              ),
+                                              itemController.item!.sideEffect!
+                                                  .length >
+                                                  50
+                                                  ? InkWell(
+                                                onTap: () => itemController
+                                                    .changeSideReadMore(),
+                                                child: Text(
                                                   itemController
-                                                      .item!.sideEffect!,
-                                                  style: robotoRegular),
+                                                      .isSideReadMore
+                                                      ? "read_less".tr
+                                                      : "read_more".tr,
+                                                  style: robotoRegular.copyWith(
+                                                      color: Theme.of(
+                                                          context)
+                                                          .primaryColor),
+                                                ),
+                                              )
+                                                  : const SizedBox(),
                                               const SizedBox(
                                                   height: Dimensions
                                                       .paddingSizeLarge),

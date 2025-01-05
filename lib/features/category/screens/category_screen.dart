@@ -49,6 +49,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
                 scrollController: _scrollController,
                 onPaginate: (int? offset) => catController.getCategoryList(false,offset: offset ?? 1),
                 totalSize: catController.categoryResponse?.totalSize,
+                viewButton: true,
                 offset: int.parse(catController.categoryResponse?.offset ?? '1'),
                 //enabledPagination: true,
                 itemView: GridView.builder(
