@@ -1,5 +1,8 @@
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:share_plus/share_plus.dart';
 import 'package:sixam_mart/features/cart/controllers/cart_controller.dart';
 import 'package:sixam_mart/features/item/controllers/item_controller.dart';
 import 'package:sixam_mart/features/splash/controllers/splash_controller.dart';
@@ -49,6 +52,38 @@ class _ItemDetailsScreenState extends State<ItemDetailsScreen> {
 
     Get.find<ItemController>().getProductDetails(widget.item!);
     Get.find<ItemController>().setSelect(0, false);
+
+  }
+  // Generate a dynamic link for the product
+  Future<String> _createDynamicLink(String productId) async {
+    final DynamicLinkParameters parameters = DynamicLinkParameters(
+      uriPrefix: 'https://ordermedicineorder.page.link', // Replace with your Firebase Dynamic Link domain
+      link: Uri.parse('https://ordermedicineorder.page.link/product/$productId'),
+      androidParameters: const AndroidParameters(
+        packageName: 'com.easymeds.ordermedicineorder',
+      ),
+      iosParameters: const IOSParameters(
+        bundleId: 'com.easymeds.ordermedicineorder',
+      ),
+    );
+    if(Firebase.apps.isEmpty){
+      await Firebase.initializeApp();
+    }
+    final ShortDynamicLink shortLink = await FirebaseDynamicLinks.instance.buildShortLink(parameters);
+    return shortLink.shortUrl.toString();
+  }
+
+  Future<void> _shareProduct() async {
+    try {
+
+      // Generate the dynamic link
+      String productLink = await _createDynamicLink(widget.item?.id.toString() ?? '');
+
+      // Share the link
+      Share.share('Check out this product: ${widget.item?.name}\n$productLink');
+    } catch (e) {
+      print('Error creating dynamic link: $e');
+    }
   }
 
   @override
@@ -203,10 +238,34 @@ class _ItemDetailsScreenState extends State<ItemDetailsScreen> {
                                         crossAxisAlignment:
                                             CrossAxisAlignment.start,
                                         children: [
-                                          ItemImageViewWidget(
-                                              item: itemController.item,
-                                              isCampaign:
-                                                  widget.isCampaign ?? false),
+                                          Stack(
+                                            children: [
+                                              ItemImageViewWidget(
+                                                  item: itemController.item,
+                                                  isCampaign:
+                                                      widget.isCampaign ?? false),
+                                        Positioned(
+                                          right: 10,
+                                          top: 10,
+                                          child: InkWell(
+                                            onTap: _shareProduct,
+                                            child: Container(
+                                              padding: const EdgeInsets.all(5),
+                                              margin: const EdgeInsets.all(5),
+                                              width: 40,
+                                              alignment: Alignment.center,
+                                              decoration: BoxDecoration(
+                                                border: Border.all(width: 1, color: Theme.of(context).primaryColor.withOpacity(0.05)),
+                                                borderRadius: BorderRadius.circular(Dimensions.radiusDefault),
+                                                color: Theme.of(context).cardColor,
+                                              ),
+                                              child: Icon(Icons.share,
+                                                  color: Theme.of(context).primaryColor),
+                                            ),
+                                          ),
+                                        )
+                                            ],
+                                          ),
                                           const SizedBox(height: 20),
 
                                           Builder(builder: (context) {
