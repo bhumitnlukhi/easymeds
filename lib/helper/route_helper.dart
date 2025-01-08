@@ -472,7 +472,7 @@ class RouteHelper {
     ))),
     GetPage(name: searchStoreItem, page: () => getRoute(StoreItemSearchScreen(storeID: Get.parameters['id']))),
     GetPage(name: order, page: () => getRoute(const OrderScreen())),
-    GetPage(name: itemDetails, page: () => getRoute(Get.arguments ?? ItemDetailsScreen(item: Item(id: int.parse(Get.parameters['id']!)), inStorePage: Get.parameters['page'] == 'restaurant'))),
+    GetPage(name: itemDetails, page: () => getRoute(Get.arguments ?? ItemDetailsScreen(item: Item(id: int.parse(Get.parameters['id'] ?? '')), inStorePage: Get.parameters['page'] == 'restaurant'))),
     GetPage(name: wallet, page: () {
       return getRoute(WalletScreen(
         fundStatus: Get.parameters['flag'] ?? Get.parameters['payment_status'],

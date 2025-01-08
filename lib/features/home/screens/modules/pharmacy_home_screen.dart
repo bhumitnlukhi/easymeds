@@ -41,10 +41,11 @@ class PharmacyHomeScreen extends StatelessWidget {
       const HighlightWidget(),
       const MiddleSectionBannerView(),
      // const BestStoreNearbyView(),
-      const CategoriesWiseProductView(),
       const JustForYouView(),
     //  const NewOnMartView(isShop: false, isPharmacy: true, isNewStore: true),
       const CommonConditionView(),
+      const CategoriesWiseProductView(),
+
       const SizedBox(height: 50,)
      // const PromotionalBannerView(),
 

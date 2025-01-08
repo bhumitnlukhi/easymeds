@@ -4,6 +4,7 @@ import 'dart:ui';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:sixam_mart/features/auth/controllers/auth_controller.dart';
 import 'package:sixam_mart/features/cart/controllers/cart_controller.dart';
+import 'package:sixam_mart/features/item/screens/item_details_screen.dart';
 import 'package:sixam_mart/features/language/controllers/language_controller.dart';
 import 'package:sixam_mart/features/splash/controllers/splash_controller.dart';
 import 'package:sixam_mart/common/controllers/theme_controller.dart';
@@ -59,17 +60,24 @@ Future<void> main() async {
         measurementId: "G-34B4E72YTQ"
     ));
   } else if(GetPlatform.isAndroid) {
-    await Firebase.initializeApp(
-      options: const FirebaseOptions(
-          apiKey: "AIzaSyBT8u6T7FN7nPT_7v1D5Evsje1r7Iv8L14",
-          authDomain: "easymeds-by-initlync.firebaseapp.com",
-          projectId: "easymeds-by-initlync",
-          storageBucket: "easymeds-by-initlync.firebasestorage.app",
-          messagingSenderId: "256398666518",
-          appId: "1:256398666518:android:50bf5d6618f727570a3e37",
-          measurementId: "G-34B4E72YTQ"
-      ),
-    );
+    print('Firebase.apps: ${Firebase.apps}');
+    if (Firebase.apps.isEmpty) {
+      await Firebase.initializeApp(
+        options: const FirebaseOptions(
+            apiKey: "AIzaSyBT8u6T7FN7nPT_7v1D5Evsje1r7Iv8L14",
+            authDomain: "easymeds-by-initlync.firebaseapp.com",
+            projectId: "easymeds-by-initlync",
+            storageBucket: "easymeds-by-initlync.firebasestorage.app",
+            messagingSenderId: "256398666518",
+            appId: "1:256398666518:android:50bf5d6618f727570a3e37",
+            measurementId: "G-34B4E72YTQ"
+        ),
+        name: 'location'
+      );
+    } else {
+      print('Firebase already initialized');
+    }
+
   } else {
     await Firebase.initializeApp();
   }
@@ -166,6 +174,16 @@ class _MyAppState extends State<MyApp> {
             getPages: RouteHelper.routes,
             defaultTransition: Transition.topLevel,
             transitionDuration: const Duration(milliseconds: 500),
+            onGenerateRoute: (products) {
+              print('onGenerateRoute triggered with: ${products.name}');
+              if (products.name?.startsWith('/product/') == true) {
+                final productId = products.name!.split('/product/').last;
+                print('product Id : is --------------> $productId');
+                 /*Get.toNamed(RouteHelper.getItemDetailsRoute(item.id, inStore),
+                    arguments: ItemDetailsScreen(item: item, inStorePage: inStore));*/
+              }
+              return null;
+            },
             builder: (BuildContext context, widget) {
               return MediaQuery(data: MediaQuery.of(context).copyWith(textScaler: const TextScaler.linear(1)), child: Material(
                 child: Stack(children: [

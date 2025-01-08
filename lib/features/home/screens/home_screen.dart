@@ -1,3 +1,4 @@
+import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/rendering.dart';
 import 'package:sixam_mart/common/controllers/theme_controller.dart';
@@ -114,6 +115,8 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     super.initState();
+    _handleDynamicLinks(); // Listen for dynamic links
+
     HomeScreen.loadData(false).then((value) {
       Get.find<SplashController>().getReferBottomSheetStatus();
 
@@ -143,6 +146,39 @@ class _HomeScreenState extends State<HomeScreen> {
       }
     });
   }
+
+  // Handle incoming dynamic links
+  Future<void> _handleDynamicLinks() async {
+    // Check if the app was opened with a dynamic link (deep link)
+    final PendingDynamicLinkData? initialLink =
+    await FirebaseDynamicLinks.instance.getInitialLink();
+
+    if (initialLink != null) {
+      _handleDeepLink(initialLink.link);  // Handle the deep link when app starts via a link
+    }
+
+    // Listen for dynamic links while the app is running in the foreground
+    FirebaseDynamicLinks.instance.onLink.listen((PendingDynamicLinkData dynamicLinkData) {
+      final Uri deepLink = dynamicLinkData.link;
+      _handleDeepLink(deepLink);  // Handle the deep link in the foreground
+    }).onError((error) {
+      print('Error handling dynamic link: $error');
+    });
+  }
+
+  // Process the deep link and navigate accordingly
+  void _handleDeepLink(Uri deepLink) {
+    // Extract the parameters from the deep link URL
+    if (deepLink.pathSegments.contains('item-details')) {
+      final itemId = deepLink.queryParameters['id']; // Get the 'id' parameter from the link
+      if (itemId != null) {
+        print('item id : is ---------> $itemId');
+        // Navigate to a new screen based on the 'id' parameter
+
+      }
+    }
+  }
+
 
   @override
   void dispose() {
@@ -446,3 +482,5 @@ class SliverDelegate extends SliverPersistentHeaderDelegate {
     return oldDelegate.maxExtent != height || oldDelegate.minExtent != height || child != oldDelegate.child;
   }
 }
+
+
