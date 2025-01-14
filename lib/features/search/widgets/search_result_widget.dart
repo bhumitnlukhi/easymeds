@@ -78,7 +78,7 @@ class SearchResultWidgetState extends State<SearchResultWidget> with TickerProvi
         )));
       }),
 
-      ResponsiveHelper.isDesktop(context) ? const SizedBox() :
+      /*ResponsiveHelper.isDesktop(context) ? const SizedBox() :
       Center(child: Container(
         width: Dimensions.webMaxWidth,
         color: Theme.of(context).cardColor,
@@ -93,27 +93,21 @@ class SearchResultWidgetState extends State<SearchResultWidget> with TickerProvi
 
           tabs: [
             Tab(text: 'item'.tr),
-            Tab(text: Get.find<SplashController>().configModel!.moduleConfig!.module!.showRestaurantText!
-                ? 'restaurants'.tr : 'stores'.tr),
+            *//*Tab(text: Get.find<SplashController>().configModel!.moduleConfig!.module!.showRestaurantText!
+                ? 'restaurants'.tr : 'stores'.tr),*//*
           ],
         ),
-      )),
+      )),*/
 
       Expanded(child: NotificationListener(
         onNotification: (dynamic scrollNotification) {
           if (scrollNotification is ScrollEndNotification) {
-            Get.find<search.SearchController>().setStore(_tabController!.index == 1);
+          //  Get.find<search.SearchController>().setStore(_tabController!.index == 1);
             Get.find<search.SearchController>().searchData(widget.searchText, false);
           }
           return false;
         },
-        child: TabBarView(
-          controller: _tabController,
-          children: const [
-            ItemViewWidget(isItem: false),
-            ItemViewWidget(isItem: true),
-          ],
-        ),
+        child:  const ItemViewWidget(isItem: false),
       )),
 
     ]);

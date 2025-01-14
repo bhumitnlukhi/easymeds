@@ -62,7 +62,7 @@ class SearchRepository implements SearchRepositoryInterface {
   }
 
   Future<Response> _getSearchData(String? query, bool isStore) async {
-    return await apiClient.getData('${AppConstants.searchUri}${isStore ? 'stores' : 'items'}/search?name=$query&offset=1&limit=50');
+    return await apiClient.getData('${AppConstants.searchUri}${isStore ? 'stores' : 'items'}/search?name=$query&offset=1&limit=10');
   }
 
   @override
