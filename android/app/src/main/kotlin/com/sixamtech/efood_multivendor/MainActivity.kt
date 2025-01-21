@@ -1,4 +1,4 @@
-package com.easymeds.ordermedicineorder
+package com.easymeds.medicineorderuser
 
 import io.flutter.embedding.android.FlutterActivity
 

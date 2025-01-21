@@ -174,11 +174,11 @@ class PharmacyCategoryView extends StatelessWidget {
                     ));
                   }
                 },
-                borderRadius: BorderRadius.circular(Dimensions.radiusSmall),
+                borderRadius: const BorderRadius.only(topLeft: Radius.circular(10), topRight: Radius.circular(10)),
                 child: Container(
                   width: 70,
                   decoration: BoxDecoration(
-                    borderRadius: const BorderRadius.only(topLeft: Radius.circular(100), topRight: Radius.circular(100)),
+                    borderRadius: const BorderRadius.only(topLeft: Radius.circular(10), topRight: Radius.circular(10)),
                     gradient: LinearGradient(
                       begin: Alignment.topCenter,
                       end: Alignment.bottomCenter,
@@ -194,7 +194,7 @@ class PharmacyCategoryView extends StatelessWidget {
                       children: [
 
                         ClipRRect(
-                          borderRadius: const BorderRadius.only(topLeft: Radius.circular(100), topRight: Radius.circular(100)),
+                          borderRadius: const BorderRadius.only(topLeft: Radius.circular(10), topRight: Radius.circular(10)),
                           child: CustomImage(
                             image: '${categoryController.categoryList![index].imageFullUrl}',
                             height: 60, width: double.infinity, fit: BoxFit.cover,
@@ -205,7 +205,7 @@ class PharmacyCategoryView extends StatelessWidget {
                           right: 0, left: 0, top: 0, bottom: 0,
                           child: Container(
                             decoration: BoxDecoration(
-                              borderRadius: const BorderRadius.only(topLeft: Radius.circular(100), topRight: Radius.circular(100)),
+                              borderRadius: const BorderRadius.only(topLeft: Radius.circular(10), topRight: Radius.circular(10)),
                               gradient: LinearGradient(
                                 begin: Alignment.topCenter,
                                 end: Alignment.bottomCenter,

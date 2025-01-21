@@ -101,7 +101,7 @@
         </activity>
 
         <activity
-            android:name="com.easymeds.ordermedicineorder.sign_in_with_apple.SignInWithAppleCallback"
+            android:name="com.easymeds.medicineorderuser.sign_in_with_apple.SignInWithAppleCallback"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
@@ -121,7 +121,7 @@
 
         <provider
             android:name="com.facebook.FacebookContentProvider"
-            android:authorities="com.facebook.app.FacebookContentProvider[facebook_app_id_easymeds]"
+            android:authorities="com.facebook.app.FacebookContentProvider315451321036373"
             android:exported="false" />
     </application>
 </manifest>

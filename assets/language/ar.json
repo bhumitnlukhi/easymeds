@@ -1274,5 +1274,11 @@
   "sender_email": "بريد المرسل",
   "receiver_email": "بريد المستلم",
   "please_enter_sender_email": "الرجاء إدخال بريد المرسل",
-  "successfully_verified": "تم التحقق بنجاح"
+  "successfully_verified": "تم التحقق بنجاح",
+  "call_enquiry": "Call & Enquiry",
+  "WhatsApp_Us": "WhatsApp Us",
+  "click_here_to_call": "Click here to call",
+  "click_here_to_chat": "Click here to chat",
+  "mfg_by": "Mfg by",
+  "side_effects": "Side Effects"
 }

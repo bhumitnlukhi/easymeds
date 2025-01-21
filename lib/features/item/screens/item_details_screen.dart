@@ -58,13 +58,13 @@ class _ItemDetailsScreenState extends State<ItemDetailsScreen> {
   // Generate a dynamic link for the product
   Future<String> _createDynamicLink(String productId) async {
     final DynamicLinkParameters parameters = DynamicLinkParameters(
-      uriPrefix: 'https://ordermedicineorder.page.link', // Replace with your Firebase Dynamic Link domain
-      link: Uri.parse('https://ordermedicineorder.page.link/item-details?id=$productId&page=item'),
+      uriPrefix: 'https://medicineorderuser.page.link', // Replace with your Firebase Dynamic Link domain
+      link: Uri.parse('https://medicineorderuser.page.link/item-details?id=$productId&page=item'),
       androidParameters: const AndroidParameters(
-        packageName: 'com.easymeds.ordermedicineorder',
+        packageName: 'com.easymeds.medicineorderuser',
       ),
       iosParameters: const IOSParameters(
-        bundleId: 'com.easymeds.ordermedicineorder',
+        bundleId: 'com.easymeds.medicineorderuser',
       ),
     );
     if(Firebase.apps.isEmpty){
@@ -579,9 +579,11 @@ class _ItemDetailsScreenState extends State<ItemDetailsScreen> {
                                                       Dimensions.fontSizeLarge),
                                             ),
                                           ]),
+                                          const Divider(
+                                              height: 20, thickness: 1.5),
                                           const SizedBox(
                                               height: Dimensions
-                                                  .paddingSizeExtraLarge),
+                                                  .paddingSizeDefault),
 
                                           (itemController.item!.description !=
                                                       null &&
@@ -670,7 +672,8 @@ class _ItemDetailsScreenState extends State<ItemDetailsScreen> {
                                           const SizedBox(
                                               height: Dimensions
                                                   .paddingSizeExtraLarge),
-
+                                          const Divider(
+                                              height: 20, thickness: 1.5),
                                           (itemController.item!.uses !=
                                               null &&
                                               itemController.item!
@@ -720,8 +723,9 @@ class _ItemDetailsScreenState extends State<ItemDetailsScreen> {
                                               : const SizedBox(),
                                           const SizedBox(
                                               height: Dimensions
-                                                  .paddingSizeExtraLarge),
-
+                                                  .paddingSizeDefault),
+                                          const Divider(
+                                              height: 20, thickness: 1.5),
                                           (itemController.item!.directionsForUse !=
                                               null &&
                                               itemController.item!
@@ -730,7 +734,7 @@ class _ItemDetailsScreenState extends State<ItemDetailsScreen> {
                                             crossAxisAlignment:
                                             CrossAxisAlignment.start,
                                             children: [
-                                              Text('directionsForUse'.tr,
+                                              Text('how_to_use'.tr,
                                                   style: robotoMedium),
                                               const SizedBox(
                                                   height: Dimensions
@@ -776,7 +780,8 @@ class _ItemDetailsScreenState extends State<ItemDetailsScreen> {
                                           const SizedBox(
                                               height: Dimensions
                                                   .paddingSizeExtraLarge),
-
+                                          const Divider(
+                                              height: 20, thickness: 1.5),
                                           (itemController.item!.sideEffect !=
                                               null &&
                                               itemController.item!
@@ -785,7 +790,7 @@ class _ItemDetailsScreenState extends State<ItemDetailsScreen> {
                                             crossAxisAlignment:
                                             CrossAxisAlignment.start,
                                             children: [
-                                              Text('sideEffect'.tr,
+                                              Text('side_effects'.tr,
                                                   style: robotoMedium),
                                               const SizedBox(
                                                   height: Dimensions
@@ -825,6 +830,8 @@ class _ItemDetailsScreenState extends State<ItemDetailsScreen> {
                                             ],
                                           )
                                               : const SizedBox(),
+                                          const Divider(
+                                              height: 20, thickness: 1.5),
                                           RelatedProductView(categoryId: widget.item?.categoryId ?? 0,)
                                         ],
                                       ),

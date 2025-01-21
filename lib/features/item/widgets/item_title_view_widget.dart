@@ -145,7 +145,7 @@ class ItemTitleViewWidget extends StatelessWidget {
             child: Padding(
               padding: const EdgeInsets.fromLTRB(0, 5, 5, 5),
               child: Text(
-                item!.storeName!,
+                "${"mfg_by".tr} : ${item!.storeName!}",
                 style: robotoMedium.copyWith(fontSize: Dimensions.fontSizeSmall, color: Theme.of(context).primaryColor),
               ),
             ),
@@ -244,8 +244,8 @@ class ItemTitleViewWidget extends StatelessWidget {
               child: Padding(
                 padding: const EdgeInsets.fromLTRB(0, 5, 5, 5),
                 child: Text(
-                  item!.storeName!,
-                  style: robotoRegular.copyWith(fontSize: Dimensions.fontSizeSmall, color: Theme.of(context).primaryColor),
+                  "${"mfg_by".tr} : ${item!.storeName!}",
+                  style: robotoRegular.copyWith(fontSize: Dimensions.fontSizeDefault, color: Theme.of(context).primaryColor),
                 ),
               ),
             ),

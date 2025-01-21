@@ -317,12 +317,12 @@ class _HomeScreenState extends State<HomeScreen> {
                                   Flexible(
                                     child: Text(
                                       AddressHelper.getUserAddressFromSharedPref()!.address!,
-                                      style: robotoRegular.copyWith(color: Theme.of(context).disabledColor, fontSize: Dimensions.fontSizeSmall),
+                                      style: robotoRegular.copyWith(color: Theme.of(context).primaryColor, fontSize: Dimensions.fontSizeSmall),
                                       maxLines: 1, overflow: TextOverflow.ellipsis,
                                     ),
                                   ),
 
-                                  Icon(Icons.expand_more, color: Theme.of(context).disabledColor, size: 18),
+                                  Icon(Icons.expand_more, color: Theme.of(context).primaryColor, size: 18),
 
                                 ]),
 
