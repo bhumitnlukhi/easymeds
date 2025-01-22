@@ -1,3 +1,4 @@
+import 'package:get/get_connect/http/src/response/response.dart';
 import 'package:sixam_mart/features/item/domain/models/basic_medicine_model.dart';
 import 'package:sixam_mart/features/item/domain/models/common_condition_model.dart';
 import 'package:sixam_mart/features/item/domain/models/item_model.dart';
@@ -29,4 +30,5 @@ abstract class ItemServiceInterface {
   int selectedVariationLength(List<List<bool?>> selectedVariations, int index);
   double? getStartingPrice(Item item);
   Future<int> isExistInCartForBottomSheet(List<CartModel> cartList, int? itemId, int? cartIndex, List<List<bool?>>? variations);
+  Future<Response> getSearchData(String? query, String? storeId);
 }

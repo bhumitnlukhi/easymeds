@@ -25,28 +25,13 @@ class _RelatedProductViewState extends State<RelatedProductView> {
   Widget build(BuildContext context) {
 
     return GetBuilder<ItemController>(builder: (itemController) {
-      List<Categories>? categories = [];
-      List<Item>? catOneProducts = [];
-      if(widget.fromShop ? itemController.reviewedCategoriesList != null && itemController.reviewedItemList != null : itemController.basicMedicineModel != null){
-        categories.add(Categories(name: 'all'.tr, id: 0));
 
-        for (var product in widget.fromShop ? itemController.reviewedItemList! : itemController.basicMedicineModel!.products!) {
-          if (widget.categoryId == product.categoryIds?[0].id) {
-            if(catOneProducts.length > 5){
-              break;
-            }
-            else {
-              catOneProducts.add(product);
-            }
-          }
-        }
-      }
-      return catOneProducts.isNotEmpty ? Padding(
+      return itemController.relatedItemList!.isNotEmpty ? Padding(
         padding: const EdgeInsets.symmetric(vertical: Dimensions.paddingSizeDefault),
         child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
 
           Column(children: [
-            catOneProducts.isNotEmpty ? Column(
+            itemController.relatedItemList!.isNotEmpty ? Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Padding(
@@ -54,7 +39,7 @@ class _RelatedProductViewState extends State<RelatedProductView> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text('Related Products', style: robotoBold.copyWith(fontSize: Dimensions.fontSizeLarge)),
+                      Text('Related_Products'.tr, style: robotoBold.copyWith(fontSize: Dimensions.fontSizeLarge)),
                       /*InkWell(
                         onTap: () {},
                         child: Text(
@@ -67,15 +52,15 @@ class _RelatedProductViewState extends State<RelatedProductView> {
                 ),
                 SizedBox(
                   height: ResponsiveHelper.isDesktop(context) ? widget.fromShop ? 290 : 260 : widget.fromShop ? 292 : 247, width: Get.width,
-                  child: (widget.fromShop ? itemController.reviewedCategoriesList != null : itemController.basicMedicineModel != null) ? ListView.builder(
+                  child: itemController.relatedItemList != null ? ListView.builder(
                     scrollDirection: Axis.horizontal,
                     physics: const BouncingScrollPhysics(),
                    // padding: const EdgeInsets.only(left: Dimensions.paddingSizeDefault),
-                    itemCount: catOneProducts.length,
+                    itemCount: itemController.relatedItemList?.length ?? 0,
                     itemBuilder: (context, index) {
                       return Padding(
                         padding: const EdgeInsets.only(bottom: Dimensions.paddingSizeDefault, right: Dimensions.paddingSizeDefault, top: Dimensions.paddingSizeDefault),
-                        child: MedicineItemCard(item: catOneProducts[index]),
+                        child: MedicineItemCard(item: itemController.relatedItemList![index]),
                       );
                     },
                   ) : const MedicineCardShimmer(),

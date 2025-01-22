@@ -58,6 +58,11 @@ class ItemService implements ItemServiceInterface {
   }
 
   @override
+  Future<Response> getSearchData(String? query, String? storeId) async {
+    return await itemRepositoryInterface.getSearchData(query, storeId);
+  }
+
+  @override
   List<bool> initializeCartAddonActiveList(List<AddOn>? addOnIds, List<AddOns>? addOns) {
     List<int?> addOnIdList = [];
     List<bool> addOnActiveList = [];
@@ -317,5 +322,7 @@ class ItemService implements ItemServiceInterface {
     }
     return -1;
   }
+
+
 
 }

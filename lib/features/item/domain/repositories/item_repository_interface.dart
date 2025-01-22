@@ -15,4 +15,6 @@ abstract class ItemRepositoryInterface implements RepositoryInterface {
   Future get(String? id, {bool isConditionWiseItem = false});
   // Future<dynamic> getCommonConditions();
   // Future<dynamic> getConditionsWiseItem(int id);
+  Future<dynamic> getSearchData(String? query, String? storeId);
+
 }

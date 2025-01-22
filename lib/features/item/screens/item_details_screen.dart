@@ -53,6 +53,7 @@ class _ItemDetailsScreenState extends State<ItemDetailsScreen> {
 
     Get.find<ItemController>().getProductDetails(widget.item!);
     Get.find<ItemController>().setSelect(0, false);
+    Get.find<ItemController>().relatedData(widget.item?.composition?.split('(').first.trim() ?? '', widget.item?.storeId.toString() ?? '');
 
   }
   // Generate a dynamic link for the product
@@ -579,6 +580,106 @@ class _ItemDetailsScreenState extends State<ItemDetailsScreen> {
                                                       Dimensions.fontSizeLarge),
                                             ),
                                           ]),
+                                          const Divider(
+                                              height: 20, thickness: 1.5),
+                                          (itemController.item!.sideEffect !=
+                                              null &&
+                                              itemController.item!
+                                                  .sideEffect!.isNotEmpty)
+                                              ? Column(
+                                            crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                            children: [
+                                              Text('Composition'.tr,
+                                                  style: robotoMedium),
+                                              const SizedBox(
+                                                  height: Dimensions
+                                                      .paddingSizeExtraSmall),
+                                              Text(
+                                                itemController
+                                                    .item!.composition!,
+                                                style: robotoRegular,
+                                                maxLines:
+                                                itemController.isCompositionReadMore
+                                                    ? 10
+                                                    : 2,
+                                                overflow:
+                                                TextOverflow.ellipsis,
+                                              ),
+                                              itemController.item!.composition!
+                                                  .length >
+                                                  50
+                                                  ? InkWell(
+                                                onTap: () => itemController
+                                                    .changeCompositionReadMore(),
+                                                child: Text(
+                                                  itemController
+                                                      .isCompositionReadMore
+                                                      ? "read_less".tr
+                                                      : "read_more".tr,
+                                                  style: robotoRegular.copyWith(
+                                                      color: Theme.of(
+                                                          context)
+                                                          .primaryColor),
+                                                ),
+                                              )
+                                                  : const SizedBox(),
+                                              const SizedBox(
+                                                  height: Dimensions
+                                                      .paddingSizeLarge),
+                                            ],
+                                          )
+                                              : const SizedBox(),
+                                          const Divider(
+                                              height: 20, thickness: 1.5),
+                                          (itemController.item!.sideEffect !=
+                                              null &&
+                                              itemController.item!
+                                                  .sideEffect!.isNotEmpty)
+                                              ? Column(
+                                            crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                            children: [
+                                              Text('PackagingDetail'.tr,
+                                                  style: robotoMedium),
+                                              const SizedBox(
+                                                  height: Dimensions
+                                                      .paddingSizeExtraSmall),
+                                              Text(
+                                                itemController
+                                                    .item!.packagingDetails!,
+                                                style: robotoRegular,
+                                                maxLines:
+                                                itemController.isPackagingReadMore
+                                                    ? 10
+                                                    : 2,
+                                                overflow:
+                                                TextOverflow.ellipsis,
+                                              ),
+                                              itemController.item!.packagingDetails!
+                                                  .length >
+                                                  50
+                                                  ? InkWell(
+                                                onTap: () => itemController
+                                                    .changePackagingDetailReadMore(),
+                                                child: Text(
+                                                  itemController
+                                                      .isPackagingReadMore
+                                                      ? "read_less".tr
+                                                      : "read_more".tr,
+                                                  style: robotoRegular.copyWith(
+                                                      color: Theme.of(
+                                                          context)
+                                                          .primaryColor),
+                                                ),
+                                              )
+                                                  : const SizedBox(),
+                                              const SizedBox(
+                                                  height: Dimensions
+                                                      .paddingSizeLarge),
+                                            ],
+                                          )
+                                              : const SizedBox(),
                                           const Divider(
                                               height: 20, thickness: 1.5),
                                           const SizedBox(

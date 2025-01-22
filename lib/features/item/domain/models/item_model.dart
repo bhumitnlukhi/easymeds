@@ -66,6 +66,8 @@ class ItemModel {
 class Item {
   int? id;
   String? name;
+  String? composition;
+  String? packagingDetails;
   String? description;
   String? imageFullUrl;
   List<String>? imagesFullUrl;
@@ -107,6 +109,8 @@ class Item {
   Item({
     this.id,
     this.name,
+    this.packagingDetails,
+    this.composition,
     this.description,
     this.imageFullUrl,
     this.imagesFullUrl,
@@ -148,6 +152,8 @@ class Item {
   Item.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     name = json['name'];
+    packagingDetails = json['packaging_details'];
+    composition = json['composition'];
     description = json['description'];
     imageFullUrl = json['image_full_url'];
     if(json['images_full_url'] != null){
@@ -229,6 +235,8 @@ class Item {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['id'] = id;
     data['name'] = name;
+    data['packaging_details'] = packagingDetails;
+    data['composition'] = composition;
     data['description'] = description;
     data['image_full_url'] = imageFullUrl;
     data['images_full_url'] = imagesFullUrl;

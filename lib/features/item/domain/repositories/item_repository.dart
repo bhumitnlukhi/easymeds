@@ -134,6 +134,13 @@ class ItemRepository implements ItemRepositoryInterface {
   }
 
   @override
+  Future<Response> getSearchData(String? query, String? storeId) async {
+    return await apiClient.getData(
+      '${AppConstants.searchUri}items/search?name=$query&limit=5&offset=1&store_id=$storeId',
+    );
+  }
+
+  @override
   Future update(Map<String, dynamic> body, int? id) {
     throw UnimplementedError();
   }

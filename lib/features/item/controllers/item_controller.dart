@@ -103,6 +103,12 @@ class ItemController extends GetxController implements GetxService {
   bool _isSideReadMore = false;
   bool get isSideReadMore => _isSideReadMore;
 
+  bool _isCompositionReadMore = false;
+  bool get isCompositionReadMore => _isCompositionReadMore;
+
+  bool _isPackagingReadMore = false;
+  bool get isPackagingReadMore => _isPackagingReadMore;
+
   BasicMedicineModel? _basicMedicineModel;
   BasicMedicineModel? get basicMedicineModel => _basicMedicineModel;
 
@@ -150,6 +156,14 @@ class ItemController extends GetxController implements GetxService {
 
   void changeSideReadMore() {
     _isSideReadMore = !_isSideReadMore;
+    update();
+  }
+  void changeCompositionReadMore() {
+    _isCompositionReadMore = !_isCompositionReadMore;
+    update();
+  }
+  void changePackagingDetailReadMore() {
+    _isPackagingReadMore = !_isPackagingReadMore;
     update();
   }
 
@@ -640,4 +654,23 @@ class ItemController extends GetxController implements GetxService {
           arguments: ItemDetailsScreen(item: item, inStorePage: inStore));
     }
   }
+
+  List<Item>? _relatedItemList = [];
+  List<Item>? get relatedItemList => _relatedItemList;
+
+
+  void relatedData(String? query, String? storeId) async {
+    if(query!.isNotEmpty) {
+      _relatedItemList = null;
+      //update();
+
+      Response response = await itemServiceInterface.getSearchData(query, storeId);
+      if (response.statusCode == 200) {
+        _relatedItemList = [];
+        _relatedItemList!.addAll(ItemModel.fromJson(response.body).items!);
+      }
+      update();
+    }
+  }
+
 }
