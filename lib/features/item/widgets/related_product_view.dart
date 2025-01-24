@@ -26,7 +26,7 @@ class _RelatedProductViewState extends State<RelatedProductView> {
 
     return GetBuilder<ItemController>(builder: (itemController) {
 
-      return itemController.relatedItemList!.isNotEmpty ? Padding(
+      return itemController.relatedItemList != null ? Padding(
         padding: const EdgeInsets.symmetric(vertical: Dimensions.paddingSizeDefault),
         child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
 

@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:io';
 import 'dart:ui';
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:sixam_mart/features/auth/controllers/auth_controller.dart';
 import 'package:sixam_mart/features/cart/controllers/cart_controller.dart';
@@ -121,7 +122,8 @@ class _MyAppState extends State<MyApp> {
   @override
   void initState() {
     super.initState();
-
+    AppConstants.campaignData = '';
+    AppConstants.campaignSource = '';
     _route();
   }
 

@@ -1,3 +1,4 @@
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/rendering.dart';
@@ -112,6 +113,7 @@ class _HomeScreenState extends State<HomeScreen> {
   bool searchBgShow = false;
   final GlobalKey _headerKey = GlobalKey();
 
+
   @override
   void initState() {
     super.initState();
@@ -169,11 +171,21 @@ class _HomeScreenState extends State<HomeScreen> {
   // Process the deep link and navigate accordingly
   void _handleDeepLink(Uri deepLink) {
     // Extract the parameters from the deep link URL
+
     if (deepLink.pathSegments.contains('item-details')) {
-      final itemId = deepLink.queryParameters['id']; // Get the 'id' parameter from the link
+      final itemId = deepLink.queryParameters['id'];
+      final utmSource = deepLink.queryParameters['utm_source'];
+      final utmCampaign = deepLink.queryParameters['utm_campaign'];// Get the 'id' parameter from the link
       if (itemId != null) {
-        print('item id : is ---------> $itemId');
         // Navigate to a new screen based on the 'id' parameter
+        debugPrint('Item id  : is ---------> $itemId');
+
+      }
+      if(utmSource != null){
+        // Log the campaign data to Firebase Analytics
+        AppConstants.campaignSource = utmSource;
+        AppConstants.campaignData = utmCampaign ?? '';
+        debugPrint('Campaign data -----------> ${AppConstants.campaignData}');
 
       }
     }

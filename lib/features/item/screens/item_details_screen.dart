@@ -55,6 +55,7 @@ class _ItemDetailsScreenState extends State<ItemDetailsScreen> {
     Get.find<ItemController>().setSelect(0, false);
     Get.find<ItemController>().relatedData(widget.item?.composition?.split('(').first.trim() ?? '', widget.item?.storeId.toString() ?? '');
 
+
   }
   // Generate a dynamic link for the product
   Future<String> _createDynamicLink(String productId) async {
@@ -87,9 +88,33 @@ class _ItemDetailsScreenState extends State<ItemDetailsScreen> {
 
       // Share the link
       Share.share('Check out this product: ${widget.item?.name}\n$productLink');
+
+      createDynamicLinkWithUTM(widget.item?.id.toString() ?? '');
     } catch (e) {
       print('Error creating dynamic link: $e');
     }
+  }
+
+  Future<Uri> createDynamicLinkWithUTM(String productId) async {
+    final DynamicLinkParameters parameters = DynamicLinkParameters(
+      uriPrefix: 'https://medicineorderuser.page.link',
+      link: Uri.parse(
+        'https://medicineorderuser.page.link/item-details?id=$productId&page=item&utm_source=google&utm_medium=cpc&utm_campaign=easyMeds2025',
+      ),
+      androidParameters: const AndroidParameters(
+        packageName: 'com.easymeds.medicineorderuser',
+        minimumVersion: 1,
+      ),
+      iosParameters: const IOSParameters(
+        bundleId: 'com.easymeds.medicineorderuser',
+        minimumVersion: '1.0.0',
+      ),
+    );
+
+    final ShortDynamicLink shortDynamicLink =
+    await FirebaseDynamicLinks.instance.buildShortLink(parameters);
+    print('dynamic link with utm : ${shortDynamicLink.shortUrl}');
+    return shortDynamicLink.shortUrl;
   }
 
   @override

@@ -318,4 +318,10 @@ class AppConstants {
     {'title': 'earned_by_referral', 'value': 'referrer'},
     {'title': 'cash_back_transactions', 'value': 'CashBack'},
   ];
+
+  ///campaign data save
+  static String campaignData = '';
+  static String campaignSource = '';
+
+
 }

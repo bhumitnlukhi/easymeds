@@ -1,4 +1,5 @@
 import 'package:country_code_picker/country_code_picker.dart';
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
@@ -399,7 +400,12 @@ class CheckoutController extends GetxController implements GetxService {
       if(response.body['user_id'] != null) {
         userID = response.body['user_id'].toString();
       }
-
+      if(AppConstants.campaignSource != ''){
+        debugPrint('<---------------- Logging event in firebase for campaign redirection ------------------>');
+        logOrderCompletedEvent(orderId: orderID,value: amount,campaign: AppConstants.campaignData,campaignSource: AppConstants.campaignSource);
+        AppConstants.campaignSource = '';
+        AppConstants.campaignData = '';
+      }
       if(!isOfflinePay) {
         callback(true, message, orderID, zoneID, amount, maximumCodOrderAmount, fromCart, isCashOnDeliveryActive, placeOrderBody.contactPersonNumber!, userID);
       } else {
@@ -558,6 +564,19 @@ class CheckoutController extends GetxController implements GetxService {
     if(willUpdate) {
       update();
     }
+  }
+
+  void logOrderCompletedEvent({String? orderId, double? value, String? campaign,String? campaignSource}) {
+    FirebaseAnalytics.instance.logEvent(
+      name: 'order_completed',
+      parameters: {
+        'order_id': orderId,
+        'value': value,
+        'currency': 'Rupee',
+        'campaign': campaign,
+        'campaign_source': campaignSource
+      },
+    );
   }
 
 }

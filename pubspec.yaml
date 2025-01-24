@@ -64,6 +64,7 @@ dependencies:
   firebase_auth: ^4.20.0
   file_picker: ^8.0.7
   firebase_dynamic_links: ^5.0.0 # For generating dynamic links
+  firebase_analytics: ^10.0.1
 
 dev_dependencies:
   flutter_test:
