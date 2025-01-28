@@ -80,6 +80,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sixam_mart/features/wallet/screens/wallet_screen.dart';
 
+import '../features/career/career_screen.dart';
+
 class RouteHelper {
   static const String initial = '/';
   static const String splash = '/splash';
@@ -135,6 +137,7 @@ class RouteHelper {
   static const String conversation = '/conversation';
   static const String restaurantRegistration = '/store-registration';
   static const String deliveryManRegistration = '/delivery-man-registration';
+  static const String careers = '/careers';
   static const String refund = '/refund';
 
   static const String offlinePaymentScreen = '/offline-payment-screen';
@@ -270,6 +273,7 @@ class RouteHelper {
   static String getConversationRoute() => conversation;
   static String getRestaurantRegistrationRoute() => restaurantRegistration;
   static String getDeliverymanRegistrationRoute() => deliveryManRegistration;
+  static String getCareersRoute() => careers;
   static String getRefundRequestRoute(String orderID) => '$refund?id=$orderID';
 
   static String getOfflinePaymentScreen({
@@ -498,6 +502,7 @@ class RouteHelper {
     GetPage(name: conversation, page: () => const ConversationScreen()),
     GetPage(name: restaurantRegistration, page: () => const StoreRegistrationScreen()),
     GetPage(name: deliveryManRegistration, page: () => const DeliveryManRegistrationScreen()),
+    GetPage(name: careers, page: () => const CareerScreen()),
     GetPage(name: refund, page: () => RefundRequestScreen(orderId: Get.parameters['id'])),
     GetPage(name: offlinePaymentScreen, page: () {
       List<int> decode = base64Decode(Get.parameters['order_body']!.replaceAll(' ', '+'));

@@ -181,6 +181,8 @@ class _HomeScreenState extends State<HomeScreen> {
         debugPrint('Item id  : is ---------> $itemId');
 
       }
+      debugPrint('Campaign data -----------> $utmCampaign $utmSource');
+
       if(utmSource != null){
         // Log the campaign data to Firebase Analytics
         AppConstants.campaignSource = utmSource;

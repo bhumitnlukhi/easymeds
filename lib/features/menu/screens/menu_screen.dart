@@ -198,6 +198,11 @@ class _MenuScreenState extends State<MenuScreen> {
                         hideDivider: (Get.find<SplashController>().configModel!.toggleStoreRegistration! && !ResponsiveHelper.isDesktop(context)) ? false : true,
                       ) : const SizedBox(),
 
+                      (Get.find<SplashController>().configModel!.toggleDmRegistration! && !ResponsiveHelper.isDesktop(context)) ? PortionWidget(
+                        icon: Images.dmIcon, title: 'Careers'.tr, route: RouteHelper.getCareersRoute(),
+                        hideDivider: (Get.find<SplashController>().configModel!.toggleStoreRegistration! && !ResponsiveHelper.isDesktop(context)) ? false : true,
+                      ) : const SizedBox(),
+
                       (Get.find<SplashController>().configModel!.toggleStoreRegistration! && !ResponsiveHelper.isDesktop(context)) ? PortionWidget(
                           icon: Images.storeIcon, title: 'open_store'.tr, hideDivider: true, route: RouteHelper.getRestaurantRegistrationRoute(),
                       ) : const SizedBox(),
