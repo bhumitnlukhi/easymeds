@@ -9,6 +9,8 @@ import 'package:sixam_mart/features/business/domain/repositories/business_repo.d
 import 'package:sixam_mart/features/business/domain/repositories/business_repo_interface.dart';
 import 'package:sixam_mart/features/business/domain/services/business_service.dart';
 import 'package:sixam_mart/features/business/domain/services/business_service_interface.dart';
+import 'package:sixam_mart/features/career/controller/career_controller.dart';
+import 'package:sixam_mart/features/career/domain/career_repositort.dart';
 import 'package:sixam_mart/features/coupon/domain/repositories/coupon_repository.dart';
 import 'package:sixam_mart/features/coupon/domain/repositories/coupon_repository_interface.dart';
 import 'package:sixam_mart/features/home/controllers/advertisement_controller.dart';
@@ -184,6 +186,12 @@ Future<Map<String, Map<String, String>>> init() async {
   Get.lazyPut(() => ApiClient(appBaseUrl: AppConstants.baseUrl, sharedPreferences: Get.find()));
 
   /// Repository interface
+  // Register CareerRepo
+  Get.lazyPut<CareerRepo>(() => CareerRepo(apiClient: Get.find()));
+
+  // Register CareerController and inject CareerRepo
+  Get.lazyPut<CareerController>(() => CareerController(careerRepo: Get.find<CareerRepo>()));
+
   CheckoutRepositoryInterface checkoutRepositoryInterface = CheckoutRepository(apiClient: Get.find(), sharedPreferences: Get.find());
   Get.lazyPut(() => checkoutRepositoryInterface);
 

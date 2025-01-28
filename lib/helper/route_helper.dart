@@ -79,8 +79,7 @@ import 'package:sixam_mart/features/update/screens/update_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sixam_mart/features/wallet/screens/wallet_screen.dart';
-
-import '../features/career/career_screen.dart';
+import 'package:sixam_mart/features/career/career_screen.dart';
 
 class RouteHelper {
   static const String initial = '/';
