@@ -165,6 +165,7 @@ class _CareerScreenState extends State<CareerScreen> {
   // Full Name Field
   Widget _buildNameField() {
     return CustomTextField(
+      labelText: 'Full Name'.tr,
       titleText: 'Full Name'.tr,
       hintText: 'Enter your full name'.tr,
       controller: careerController.nameController,
@@ -177,6 +178,7 @@ class _CareerScreenState extends State<CareerScreen> {
   // Email Field
   Widget _buildEmailField() {
     return CustomTextField(
+      labelText: 'Email'.tr,
       titleText: 'Email'.tr,
       hintText: 'Enter your email address'.tr,
       controller: careerController.emailController,
@@ -189,6 +191,7 @@ class _CareerScreenState extends State<CareerScreen> {
   // Phone Number Field
   Widget _buildPhoneNumberField() {
     return CustomTextField(
+      labelText: 'Phone Number'.tr,
       titleText: 'Phone Number'.tr,
       hintText: 'Enter your phone number'.tr,
       controller: careerController.phoneController,
@@ -211,19 +214,17 @@ class _CareerScreenState extends State<CareerScreen> {
   // Gender Field
   Widget _buildGenderField() {
     return Obx(() {
-      return Expanded(
-        child: CustomDropdownWidget(
-          labelText: 'Gender'.tr,
-          options: careerController.genderOptions, // Reactive options
-          selectedValue: careerController.selectedGender,
-          onChanged: (value) {
-            careerController.selectedGender = value!;
-            print('Selected gender: $value');
-          },
-          validator: (value) => value == null || value.isEmpty
-              ? 'Please select your gender'.tr
-              : null,
-        ),
+      return CustomDropdownWidget(
+        labelText: 'Gender'.tr,
+        options: careerController.genderOptions, // Reactive options
+        selectedValue: careerController.selectedGender,
+        onChanged: (value) {
+          careerController.selectedGender = value!;
+          print('Selected gender: $value');
+        },
+        validator: (value) => value == null || value.isEmpty
+            ? 'Please select your gender'.tr
+            : null,
       );
     });
   }
@@ -232,6 +233,7 @@ class _CareerScreenState extends State<CareerScreen> {
   Widget _buildJobLocationField() {
     return CustomTextField(
       titleText: 'Preferred Job Location'.tr,
+      labelText: 'Preferred Job Location'.tr,
       hintText: 'Enter your preferred job location'.tr,
       controller: careerController.jobLocationController,
       inputType: TextInputType.text,
@@ -264,6 +266,7 @@ class _CareerScreenState extends State<CareerScreen> {
   Widget _buildQualificationField() {
     return CustomTextField(
       titleText: 'Highest Qualification'.tr,
+      labelText: 'Highest Qualification'.tr,
       hintText: 'Enter your highest qualification'.tr,
       controller: careerController.qualificationController,
       inputType: TextInputType.text,
