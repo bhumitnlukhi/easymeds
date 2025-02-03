@@ -1,8 +1,12 @@
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:share_plus/share_plus.dart';
 import 'package:sixam_mart/features/cart/controllers/cart_controller.dart';
 import 'package:sixam_mart/features/item/controllers/item_controller.dart';
 import 'package:sixam_mart/features/item/domain/models/item_model.dart';
+import 'package:sixam_mart/features/item/widgets/related_product_view.dart';
 import 'package:sixam_mart/features/splash/controllers/splash_controller.dart';
 import 'package:sixam_mart/features/checkout/domain/models/place_order_body_model.dart';
 import 'package:sixam_mart/features/cart/domain/models/cart_model.dart';
@@ -35,12 +39,77 @@ class DetailsWebViewWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
     return GetBuilder<ItemController>(builder: (itemController) {
       List<String?> imageList = [];
       imageList.add(itemController.item!.imageFullUrl);
       if (itemController.item!.imagesFullUrl != null) {
         imageList.addAll(itemController.item!.imagesFullUrl!);
       }
+
+      ///code for dynamic link generation
+  /*    // Generate a dynamic link for the product
+      Future<String> _createDynamicLink(String productId) async {
+        final DynamicLinkParameters parameters = DynamicLinkParameters(
+          uriPrefix: 'https://medicineorderuser.page.link', // Replace with your Firebase Dynamic Link domain
+          link: Uri.parse('https://medicineorderuser.page.link/item-details?id=$productId&page=item'),
+          androidParameters: const AndroidParameters(
+            packageName: 'com.easymeds.medicineorderuser',
+          ),
+          iosParameters: const IOSParameters(
+            bundleId: 'com.easymeds.medicineorderuser',
+          ),
+        );
+        if(Firebase.apps.isEmpty){
+          await Firebase.initializeApp();
+        }
+        *//* // Generate short dynamic link
+    Uri dynamicShortLink = await FirebaseDynamicLinks.instance.buildShortLink(parameters);
+    return dynamicShortLink.toString();*//*
+        final ShortDynamicLink shortLink = await FirebaseDynamicLinks.instance.buildShortLink(parameters);
+
+        return shortLink.shortUrl.toString();
+      }
+      Future<Uri> createDynamicLinkWithUTM(String productId) async {
+        final DynamicLinkParameters parameters = DynamicLinkParameters(
+          uriPrefix: 'https://medicineorderuser.page.link',
+          link: Uri.parse(
+            'https://medicineorderuser.page.link/item-details?id=$productId&page=item&utm_source=google&utm_medium=cpc&utm_campaign=easyMeds2025',
+          ),
+          androidParameters: const AndroidParameters(
+            packageName: 'com.easymeds.medicineorderuser',
+            minimumVersion: 1,
+          ),
+          iosParameters: const IOSParameters(
+            bundleId: 'com.easymeds.medicineorderuser',
+            minimumVersion: '1.0.0',
+          ),
+        );
+
+        final ShortDynamicLink shortDynamicLink =
+        await FirebaseDynamicLinks.instance.buildShortLink(parameters);
+        print('dynamic link with utm : ${shortDynamicLink.shortUrl}');
+        return shortDynamicLink.shortUrl;
+      }
+
+
+      Future<void> _shareProduct() async {
+        try {
+
+          // Generate the dynamic link
+          String productLink = await _createDynamicLink(cartModel?.item?.id.toString() ?? '');
+
+          // Share the link
+          Share.share('Check out this product: ${cartModel?.item?.name}\n$productLink');
+
+          createDynamicLinkWithUTM(cartModel?.item?.id.toString() ?? '');
+        } catch (e) {
+          print('Error creating dynamic link: $e');
+        }
+      }
+*/
+
+
 
       return SingleChildScrollView(
           child: FooterView(
@@ -65,10 +134,35 @@ class DetailsWebViewWidget extends StatelessWidget {
                                   children: [
                                     SizedBox(
                                       height: Get.size.height * 0.5,
-                                      child: CustomImage(
-                                        fit: BoxFit.cover,
-                                        image:
-                                            '${imageList[itemController.productSelect]}',
+                                      child: Stack(
+                                        children: [
+                                          CustomImage(
+                                            fit: BoxFit.cover,
+                                            image:
+                                                '${imageList[itemController.productSelect]}',
+                                          ),
+                                          Positioned(
+                                            right: 10,
+                                            top: 10,
+                                            child: InkWell(
+                                              onTap: () {},
+                                              child: Container(
+                                                padding: const EdgeInsets.all(5),
+                                                margin: const EdgeInsets.all(5),
+                                                width: 40,
+                                                alignment: Alignment.center,
+                                                decoration: BoxDecoration(
+                                                  border: Border.all(width: 1, color: Theme.of(context).primaryColor.withOpacity(0.05)),
+                                                  borderRadius: BorderRadius.circular(Dimensions.radiusDefault),
+                                                  color: Theme.of(context).cardColor,
+                                                ),
+                                                child: Icon(Icons.share,
+                                                    color: Theme.of(context).primaryColor),
+                                              ),
+                                            ),
+                                          )
+
+                                        ],
                                       ),
                                     ),
                                     const SizedBox(height: 10),
@@ -601,6 +695,104 @@ class DetailsWebViewWidget extends StatelessWidget {
                                           );
                                         }),
                                       ]),
+                                      const Divider(
+                                          height: 20, thickness: 1.5),
+                                      (itemController.item!.sideEffect !=
+                                          null &&
+                                          itemController.item!
+                                              .sideEffect!.isNotEmpty)
+                                          ? Column(
+                                        crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                        children: [
+                                          Text('Composition'.tr,
+                                              style: robotoMedium),
+                                          const SizedBox(
+                                              height: Dimensions
+                                                  .paddingSizeExtraSmall),
+                                          Text(
+                                            itemController
+                                                .item!.composition!,
+                                            style: robotoRegular,
+                                            maxLines:
+                                            itemController.isCompositionReadMore
+                                                ? 10
+                                                : 2,
+                                            overflow:
+                                            TextOverflow.ellipsis,
+                                          ),
+                                          itemController.item!.composition!
+                                              .length >
+                                              50
+                                              ? InkWell(
+                                            onTap: () => itemController
+                                                .changeCompositionReadMore(),
+                                            child: Text(
+                                              itemController
+                                                  .isCompositionReadMore
+                                                  ? "read_less".tr
+                                                  : "read_more".tr,
+                                              style: robotoRegular.copyWith(
+                                                  color: Theme.of(
+                                                      context)
+                                                      .primaryColor),
+                                            ),
+                                          )
+                                              : const SizedBox(),
+                                          const SizedBox(
+                                              height: Dimensions
+                                                  .paddingSizeLarge),
+                                        ],
+                                      )
+                                          : const SizedBox(),
+                                      (itemController.item!.sideEffect !=
+                                          null &&
+                                          itemController.item!
+                                              .sideEffect!.isNotEmpty)
+                                          ? Column(
+                                        crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                        children: [
+                                          Text('PackagingDetail'.tr,
+                                              style: robotoMedium),
+                                          const SizedBox(
+                                              height: Dimensions
+                                                  .paddingSizeExtraSmall),
+                                          Text(
+                                            itemController
+                                                .item!.packagingDetails!,
+                                            style: robotoRegular,
+                                            maxLines:
+                                            itemController.isPackagingReadMore
+                                                ? 10
+                                                : 2,
+                                            overflow:
+                                            TextOverflow.ellipsis,
+                                          ),
+                                          itemController.item!.packagingDetails!
+                                              .length >
+                                              50
+                                              ? InkWell(
+                                            onTap: () => itemController
+                                                .changePackagingDetailReadMore(),
+                                            child: Text(
+                                              itemController
+                                                  .isPackagingReadMore
+                                                  ? "read_less".tr
+                                                  : "read_more".tr,
+                                              style: robotoRegular.copyWith(
+                                                  color: Theme.of(
+                                                      context)
+                                                      .primaryColor),
+                                            ),
+                                          )
+                                              : const SizedBox(),
+                                          const SizedBox(
+                                              height: Dimensions
+                                                  .paddingSizeLarge),
+                                        ],
+                                      )
+                                          : const SizedBox(),
                                       (itemController.item!.uses != null &&
                                               itemController
                                                   .item!.uses!.isNotEmpty)
@@ -661,7 +853,7 @@ class DetailsWebViewWidget extends StatelessWidget {
                                                 const SizedBox(
                                                     height: Dimensions
                                                         .paddingSizeLarge),
-                                                Text('directionsForUse'.tr,
+                                                Text('how_to_use'.tr,
                                                     style: robotoMedium),
                                                 const SizedBox(
                                                     height: Dimensions
@@ -714,7 +906,7 @@ class DetailsWebViewWidget extends StatelessWidget {
                                                 const SizedBox(
                                                     height: Dimensions
                                                         .paddingSizeLarge),
-                                                Text('sideEffect'.tr,
+                                                Text('side_effects'.tr,
                                                     style: robotoMedium),
                                                 const SizedBox(
                                                     height: Dimensions
@@ -757,9 +949,14 @@ class DetailsWebViewWidget extends StatelessWidget {
                                       const SizedBox(
                                           height: Dimensions
                                               .paddingSizeExtremeLarge),
+
                                     ]),
                               )),
                         ]))),
+            SizedBox(
+                width: Dimensions.webMaxWidth,
+                child: RelatedProductView(categoryId: cartModel?.item?.categoryId ?? 0,))
+
           ]),
         ),
       ));

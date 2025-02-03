@@ -214,7 +214,7 @@ class _PharmacyCategoryViewState extends State<PharmacyCategoryView> {
                 physics: const BouncingScrollPhysics(),
                 shrinkWrap: true,
                 scrollDirection: Axis.horizontal,
-                itemCount: widget.categoryController.categoryList!.length,
+                itemCount: widget.categoryController.categoryList!.length > 8 ? 8 : widget.categoryController.categoryList!.length,
                 itemBuilder: (context, index) {
                   return Padding(
                     padding: EdgeInsets.only(
@@ -224,9 +224,16 @@ class _PharmacyCategoryViewState extends State<PharmacyCategoryView> {
                     ),
                     child: InkWell(
                       hoverColor: Colors.transparent,
-                      onTap: () => Get.toNamed(RouteHelper.getCategoryItemRoute(
-                        widget.categoryController.categoryList![index].id, widget.categoryController.categoryList![index].name!,
-                      )),
+                      onTap: () {
+                        if(index == 7 && widget.categoryController.categoryList!.length > 8){
+                          Get.toNamed(RouteHelper.getCategoryRoute());
+                        }
+                        else {
+                          Get.toNamed(RouteHelper.getCategoryItemRoute(
+                            widget.categoryController.categoryList![index].id, widget.categoryController.categoryList![index].name!,
+                          ));
+                        }
+                      },
                       borderRadius: BorderRadius.circular(Dimensions.radiusSmall),
                       child: Container(
                         width: 100,
@@ -243,12 +250,41 @@ class _PharmacyCategoryViewState extends State<PharmacyCategoryView> {
                         ),
                         child: Column(children: [
 
-                          ClipRRect(
-                            borderRadius: const BorderRadius.only(topLeft: Radius.circular(100), topRight: Radius.circular(100)),
-                            child: CustomImage(
-                              image: '${widget.categoryController.categoryList![index].imageFullUrl}',
-                              height: 80, width: double.infinity, fit: BoxFit.cover,
-                            ),
+                          Stack(
+                            children: [
+                              ClipRRect(
+                                borderRadius: const BorderRadius.only(topLeft: Radius.circular(100), topRight: Radius.circular(100)),
+                                child: CustomImage(
+                                  image: '${widget.categoryController.categoryList![index].imageFullUrl}',
+                                  height: 80, width: double.infinity, fit: BoxFit.cover,
+                                ),
+                              ),
+                              (index == 7 && widget.categoryController.categoryList!.length > 8) ? Positioned(
+                                right: 0, left: 0, top: 0, bottom: 0,
+                                child: Container(
+                                    decoration: BoxDecoration(
+                                      borderRadius: const BorderRadius.only(topLeft: Radius.circular(100), topRight: Radius.circular(100)),
+                                      gradient: LinearGradient(
+                                        begin: Alignment.topCenter,
+                                        end: Alignment.bottomCenter,
+                                        colors: [
+                                          Theme.of(context).primaryColor.withOpacity(0.4),
+                                          Theme.of(context).primaryColor.withOpacity(0.6),
+                                          Theme.of(context).primaryColor.withOpacity(0.4),
+                                        ],
+                                      ),
+                                    ),
+                                    child: Center(
+                                      child: Text(
+                                        '+${widget.categoryController.categoryResponse?.totalSize ?? 9 - 8}',
+                                        style: robotoMedium.copyWith(fontSize: Dimensions.fontSizeExtraLarge, color: Theme.of(context).cardColor),
+                                        maxLines: 2, overflow: TextOverflow.ellipsis, textAlign: TextAlign.center,
+                                      ),
+                                    )
+                                ),
+                              ) : const SizedBox(),
+
+                            ],
                           ),
                           const SizedBox(height: Dimensions.paddingSizeSmall),
 

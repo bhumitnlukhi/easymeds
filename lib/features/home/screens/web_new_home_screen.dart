@@ -1,5 +1,6 @@
 import 'package:sixam_mart/features/banner/controllers/banner_controller.dart';
 import 'package:sixam_mart/features/home/widgets/all_store_filter_widget.dart';
+import 'package:sixam_mart/features/home/widgets/views/store_wise_product_list.dart';
 import 'package:sixam_mart/features/home/widgets/web/web_brands_view_widget.dart';
 import 'package:sixam_mart/features/home/widgets/web/web_highlight_widget.dart';
 import 'package:sixam_mart/features/item/controllers/campaign_controller.dart';
@@ -41,6 +42,9 @@ import 'package:sixam_mart/features/dashboard/widgets/address_bottom_sheet_widge
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sixam_mart/features/home/widgets/bad_weather_widget.dart';
+
+import '../widgets/views/contact_buttons.dart';
+import '../widgets/views/just_for_you_view.dart';
 
 class WebNewHomeScreen extends StatefulWidget {
   final ScrollController scrollController;
@@ -128,6 +132,9 @@ class _WebNewHomeScreenState extends State<WebNewHomeScreen> {
                       : categoryController.categoryList!.isEmpty ? const SizedBox() : WebCategoryViewWidget(categoryController: categoryController);
                 }),
 
+                const Center(child: ContactButtons()),
+
+
                 _isLogin ?  WebVisitAgainView(fromFood: isFood) : const SizedBox(),
 
                 isPharmacy ? const WebBasicMedicineNearbyViewWidget()
@@ -147,7 +154,7 @@ class _WebNewHomeScreenState extends State<WebNewHomeScreen> {
 
                 isShop ? const WebBrandsViewWidget() : (isPharmacy || isFood) ? const SizedBox() : const SizedBox(),
 
-                isPharmacy ? const WebJustForYouViewWidget()
+                /*isPharmacy ? const WebJustForYouViewWidget()
                     : isFood ? const WebItemThatYouLoveViewWidget()
                     : isShop ? const WebSpecialOfferView(isFood: false, isShop: true)
                     : GetBuilder<CampaignController>(builder: (campaignController) {
@@ -159,7 +166,7 @@ class _WebNewHomeScreenState extends State<WebNewHomeScreen> {
                 isPharmacy ? const WebNewOnViewWidget()
                     : isFood ? const WebMostPopularItemViewWidget(isFood: true, isShop: false)
                     : isShop ? const WebBestReviewItemViewWidget()
-                    : const WebBestReviewItemViewWidget(),
+                    : const WebBestReviewItemViewWidget(),*/
 
                 isPharmacy ? const WebCommonConditionViewWidget()
                     : isFood ? const WebJustForYouViewWidget()
@@ -178,6 +185,7 @@ class _WebNewHomeScreenState extends State<WebNewHomeScreen> {
                 (isPharmacy || isFood) ? const SizedBox() : isShop ? const WebNewOnViewWidget() : const WebNewOnMartViewWidget(),
 
                 isFood ? const SizedBox() : const WebPromotionalBannerView(),
+                const CategoriesWiseProductView(),
 
                 // Padding(
                 //   padding: const EdgeInsets.fromLTRB(10, 20, 0, 5),
@@ -223,7 +231,7 @@ class _WebNewHomeScreenState extends State<WebNewHomeScreen> {
             ),
           ),
 
-          SliverPersistentHeader(
+          /*SliverPersistentHeader(
             pinned: true,
             delegate: SliverDelegate(
               height: 85,
@@ -232,26 +240,27 @@ class _WebNewHomeScreenState extends State<WebNewHomeScreen> {
               // },
               child: const AllStoreFilterWidget(),
             ),
-          ),
+          ),*/
 
           SliverToBoxAdapter(
             child: GetBuilder<StoreController>(builder: (storeController) {
               return FooterView(
+                minHeight: 0.05,
                 child: SizedBox(
                   width: Dimensions.webMaxWidth,
                   child: PaginatedListView(
                     scrollController: widget.scrollController,
-                    totalSize: storeController.storeModel?.totalSize,
+                    totalSize: 0,
                     offset: storeController.storeModel?.offset,
                     onPaginate: (int? offset) async => await storeController.getStoreList(offset!, false),
-                    itemView: ItemsView(
+                    itemView: const SizedBox()/*ItemsView(
                       isStore: true, items: null,
                       stores: storeController.storeModel?.stores,
                       padding: EdgeInsets.symmetric(
                         horizontal: ResponsiveHelper.isDesktop(context) ? Dimensions.paddingSizeExtraSmall : Dimensions.paddingSizeSmall,
                         vertical: ResponsiveHelper.isDesktop(context) ? Dimensions.paddingSizeExtraSmall : 0,
                       ),
-                    ),
+                    )*/,
                   ),
                 ),
               );
