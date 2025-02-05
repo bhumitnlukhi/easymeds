@@ -38,6 +38,7 @@ class PharmacyHomeScreen extends StatelessWidget {
 
       const CategoryView(),
       const Center(child: ContactButtons()),
+      const CommonConditionView(),
       isLoggedIn ? const VisitAgainView() : const SizedBox(),
       const ProductWithCategoriesView(),
       const HighlightWidget(),
@@ -45,7 +46,6 @@ class PharmacyHomeScreen extends StatelessWidget {
      // const BestStoreNearbyView(),
       const JustForYouView(),
     //  const NewOnMartView(isShop: false, isPharmacy: true, isNewStore: true),
-      const CommonConditionView(),
       const CategoriesWiseProductView(),
 
       const SizedBox(height: 50,)

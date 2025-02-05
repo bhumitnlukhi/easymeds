@@ -13,7 +13,7 @@ class ItemRepository implements ItemRepositoryInterface {
   @override
   Future<BasicMedicineModel?> getBasicMedicine() async {
     BasicMedicineModel? basicMedicineModel;
-    Response response = await apiClient.getData('${AppConstants.basicMedicineUri}?offset=1&limit=50');
+    Response response = await apiClient.getData('${AppConstants.basicMedicineUri}?offset=1&limit=20');
     if (response.statusCode == 200) {
       basicMedicineModel = BasicMedicineModel.fromJson(response.body);
     }
@@ -50,7 +50,7 @@ class ItemRepository implements ItemRepositoryInterface {
 
   Future<List<Item>?> _getConditionsWiseItems(int id) async {
     List<Item>? conditionWiseProduct;
-    Response response = await apiClient.getData('${AppConstants.conditionWiseItemUri}$id?limit=30&offset=1');
+    Response response = await apiClient.getData('${AppConstants.conditionWiseItemUri}$id?limit=20&offset=1');
     if (response.statusCode == 200) {
       conditionWiseProduct = [];
       conditionWiseProduct.addAll(ItemModel.fromJson(response.body).items!);

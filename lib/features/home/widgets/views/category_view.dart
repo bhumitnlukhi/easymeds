@@ -62,7 +62,7 @@ class CategoryView extends StatelessWidget {
                                       borderRadius: BorderRadius.circular(Dimensions.radiusSmall),
                                       child: CustomImage(
                                         image: '${categoryController.categoryList![index].imageFullUrl}',
-                                        height: 75, width: 75, fit: BoxFit.cover,
+                                        height: 75, width: 75, fit: BoxFit.fitHeight,
                                       ),
                                     ),
 
@@ -197,8 +197,8 @@ class PharmacyCategoryView extends StatelessWidget {
                           borderRadius: const BorderRadius.only(topLeft: Radius.circular(10), topRight: Radius.circular(10)),
                           child: CustomImage(
                             image: '${categoryController.categoryList![index].imageFullUrl}',
-                            height: 60, width: double.infinity, fit: BoxFit.cover,
-                          ),
+                            height: 60, width: double.infinity, fit: BoxFit.fitHeight,
+                          ).paddingOnly(top: 4),
                         ),
 
                         (index == 7 && categoryController.categoryList!.length > 8) ? Positioned(

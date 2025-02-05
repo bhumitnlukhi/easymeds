@@ -141,7 +141,7 @@ class _WebNewHomeScreenState extends State<WebNewHomeScreen> {
                     : isShop ? const WebMostPopularItemViewWidget(isShop: true, isFood: false)
                     : const WebSpecialOfferView(isFood: false, isShop: false),
 
-                const WebHighlightWidget(),
+                /*const WebHighlightWidget(),
 
                 (isPharmacy || isShop) ? const MiddleSectionMultipleBannerViewWidget()
                     : isFood ? const WebBestReviewItemViewWidget()
@@ -154,7 +154,7 @@ class _WebNewHomeScreenState extends State<WebNewHomeScreen> {
 
                 isShop ? const WebBrandsViewWidget() : (isPharmacy || isFood) ? const SizedBox() : const SizedBox(),
 
-                /*isPharmacy ? const WebJustForYouViewWidget()
+                isPharmacy ? const WebJustForYouViewWidget()
                     : isFood ? const WebItemThatYouLoveViewWidget()
                     : isShop ? const WebSpecialOfferView(isFood: false, isShop: true)
                     : GetBuilder<CampaignController>(builder: (campaignController) {

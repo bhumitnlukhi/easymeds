@@ -18,6 +18,7 @@ class ContactButtons extends StatelessWidget {
           color: Colors.teal,
           title: "call_enquiry".tr,
           label: "click_here_to_call".tr,
+          isPhone: true,
           onTap: () => _makePhoneCall('tel:+917809687533'),
         ),
         _buildContactButton(
@@ -25,6 +26,7 @@ class ContactButtons extends StatelessWidget {
           color: Colors.green,
           title: "WhatsApp_Us".tr,
           label: "click_here_to_chat".tr,
+          isPhone: false,
           onTap: () => _openWhatsApp('+917809687533'),
         ),
       ],
@@ -36,12 +38,13 @@ class ContactButtons extends StatelessWidget {
     required Color color,
     required String label,
     required VoidCallback onTap,
-    required String title
+    required String title,
+    required bool isPhone
   }) {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        width: 200,
+        width: 180,
         padding: const EdgeInsets.all(12),
         decoration: BoxDecoration(
           color: Colors.white,
@@ -57,8 +60,9 @@ class ContactButtons extends StatelessWidget {
         ),
         child: Row(
           mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Image.asset(image, height: 35, width: 35),
+            Image.asset(image, height: isPhone ?  25 : 30, width: isPhone ? 25 : 30,fit: BoxFit.fill),
             const SizedBox(width: 8),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -66,12 +70,12 @@ class ContactButtons extends StatelessWidget {
                 Text(
                   title,
                   textAlign: TextAlign.center,
-                  style: robotoBold.copyWith(fontSize: Dimensions.fontSizeLarge),
+                  style: robotoBold.copyWith(fontSize: Dimensions.fontSizeDefault),
                 ),
                 Text(
                   label,
                   textAlign: TextAlign.center,
-                  style: robotoBold.copyWith(fontSize: Dimensions.fontSizeDefault),                ),
+                  style: robotoBold.copyWith(fontSize: Dimensions.fontSizeSmall),                ),
               ],
             ),
           ],
