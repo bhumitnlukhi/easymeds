@@ -803,7 +803,7 @@ class DetailsWebViewWidget extends StatelessWidget {
                                                 const SizedBox(
                                                     height: Dimensions
                                                         .paddingSizeLarge),
-                                                Text('uses'.tr,
+                                                Text('Uses'.tr,
                                                     style: robotoMedium),
                                                 const SizedBox(
                                                     height: Dimensions

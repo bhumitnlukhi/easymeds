@@ -547,7 +547,7 @@ class OrderInfoWidget extends StatelessWidget {
                   ),
                   Text(
                     parcel ? order.parcelCategory!.description! : order.store?.address ?? '', maxLines: 1, overflow: TextOverflow.ellipsis,
-                    style: robotoRegular.copyWith(fontSize: Dimensions.fontSizeSmall, color: Theme.of(context).disabledColor),
+                    style: robotoRegular.copyWith(fontSize: Dimensions.fontSizeSmall, color: Theme.of(context).primaryColor),
                   ),
                 ])),
 
@@ -646,7 +646,7 @@ class OrderInfoWidget extends StatelessWidget {
                         : order.paymentMethod == 'wallet' ? 'wallet'.tr
                         : order.paymentMethod == 'partial_payment' ? 'partial_payment'.tr
                         : 'digital'.tr,
-                    style: robotoMedium.copyWith(fontSize: Dimensions.fontSizeSmall, color: Theme.of(context).disabledColor),
+                    style: robotoMedium.copyWith(fontSize: Dimensions.fontSizeSmall, color: Theme.of(context).primaryColor),
                   ),
                 ),
 

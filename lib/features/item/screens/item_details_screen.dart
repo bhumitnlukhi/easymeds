@@ -462,7 +462,7 @@ class _ItemDetailsScreenState extends State<ItemDetailsScreen> {
                                               Container(
                                                 decoration: BoxDecoration(
                                                     color: Theme.of(context)
-                                                        .disabledColor,
+                                                        .primaryColor.withOpacity(0.9),
                                                     borderRadius:
                                                         BorderRadius.circular(
                                                             5)),
@@ -509,6 +509,7 @@ class _ItemDetailsScreenState extends State<ItemDetailsScreen> {
                                                           vertical: Dimensions
                                                               .paddingSizeExtraSmall),
                                                       child: Icon(Icons.remove,
+                                                          color: Colors.white,
                                                           size: 20),
                                                     ),
                                                   ),
@@ -530,13 +531,13 @@ class _ItemDetailsScreenState extends State<ItemDetailsScreen> {
                                                               .copyWith(
                                                                   fontSize:
                                                                       Dimensions
-                                                                          .fontSizeExtraLarge),
+                                                                          .fontSizeExtraLarge,color: Colors.white),
                                                         )
                                                       : const SizedBox(
                                                           height: 20,
                                                           width: 20,
                                                           child:
-                                                              CircularProgressIndicator()),
+                                                              CircularProgressIndicator(color: Colors.white,)),
                                                   InkWell(
                                                     onTap: cartController
                                                             .isLoading
@@ -568,6 +569,7 @@ class _ItemDetailsScreenState extends State<ItemDetailsScreen> {
                                                           vertical: Dimensions
                                                               .paddingSizeExtraSmall),
                                                       child: Icon(Icons.add,
+                                                          color: Colors.white,
                                                           size: 20),
                                                     ),
                                                   ),
@@ -616,14 +618,18 @@ class _ItemDetailsScreenState extends State<ItemDetailsScreen> {
                                             CrossAxisAlignment.start,
                                             children: [
                                               Text('Composition'.tr,
-                                                  style: robotoMedium),
+                                                  style: robotoMedium.copyWith(color: Theme.of(
+                                                      context)
+                                                      .primaryColor)),
                                               const SizedBox(
                                                   height: Dimensions
                                                       .paddingSizeExtraSmall),
                                               Text(
                                                 itemController
                                                     .item!.composition!,
-                                                style: robotoRegular,
+                                                style: robotoRegular.copyWith(color: Theme.of(
+                                                    context)
+                                                    .primaryColor),
                                                 maxLines:
                                                 itemController.isCompositionReadMore
                                                     ? 10
@@ -666,7 +672,9 @@ class _ItemDetailsScreenState extends State<ItemDetailsScreen> {
                                             CrossAxisAlignment.start,
                                             children: [
                                               Text('PackagingDetail'.tr,
-                                                  style: robotoMedium),
+                                                  style: robotoMedium.copyWith(
+                                                    color: Theme.of(context).primaryColor
+                                                  )),
                                               const SizedBox(
                                                   height: Dimensions
                                                       .paddingSizeExtraSmall),
@@ -808,7 +816,7 @@ class _ItemDetailsScreenState extends State<ItemDetailsScreen> {
                                             crossAxisAlignment:
                                             CrossAxisAlignment.start,
                                             children: [
-                                              Text('uses'.tr,
+                                              Text('Uses'.tr,
                                                   style: robotoMedium),
                                               const SizedBox(
                                                   height: Dimensions

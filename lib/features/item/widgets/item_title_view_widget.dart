@@ -121,10 +121,10 @@ class ItemTitleViewWidget extends StatelessWidget {
             Container(
               padding: const EdgeInsets.symmetric(horizontal: Dimensions.paddingSizeSmall, vertical: Dimensions.paddingSizeExtraSmall),
               decoration: BoxDecoration(
-                color: inStock ? Colors.red.shade50 : Colors.green.shade50, borderRadius: BorderRadius.circular(Dimensions.radiusSmall),
+                color: inStock ? Colors.red.shade50 : Theme.of(context).primaryColor.withOpacity(0.9), borderRadius: BorderRadius.circular(Dimensions.radiusSmall),
               ),
               child: Text(inStock ? 'out_of_stock'.tr : 'in_stock'.tr, style: robotoRegular.copyWith(
-                color: Theme.of(context).primaryColor,
+                color: Colors.white,
                 fontSize: Dimensions.fontSizeExtraSmall,
               )),
             ),
@@ -301,7 +301,7 @@ class ItemTitleViewWidget extends StatelessWidget {
                 Container(
                   padding: const EdgeInsets.symmetric(horizontal: Dimensions.paddingSizeSmall, vertical: Dimensions.paddingSizeExtraSmall),
                   decoration: BoxDecoration(
-                    color: inStock ? Colors.red : Colors.green, borderRadius: BorderRadius.circular(Dimensions.radiusSmall),
+                    color: inStock ? Colors.red : Theme.of(context).primaryColor.withOpacity(0.9), borderRadius: BorderRadius.circular(Dimensions.radiusSmall),
                   ),
                   child: Text(inStock ? 'out_of_stock'.tr : 'in_stock'.tr, style: robotoRegular.copyWith(
                     color: Colors.white,

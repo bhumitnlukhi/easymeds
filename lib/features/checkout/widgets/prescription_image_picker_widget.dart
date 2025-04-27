@@ -74,7 +74,7 @@ class PrescriptionImagePickerWidget extends StatelessWidget {
                   ),
                     child:  Column(mainAxisAlignment: MainAxisAlignment.center, children: [
                       Icon(Icons.cloud_upload, color: Theme.of(context).disabledColor, size: 32),
-                      Text('upload_your_prescription'.tr, style: robotoRegular.copyWith(color: Theme.of(context).disabledColor, fontSize: Dimensions.fontSizeSmall), textAlign: TextAlign.center,),
+                      Text('upload_your_prescription'.tr, style: robotoRegular.copyWith(color: Theme.of(context).primaryColor, fontSize: Dimensions.fontSizeSmall), textAlign: TextAlign.center,),
                     ]),
                   ),
                 ),

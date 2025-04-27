@@ -78,7 +78,7 @@ class _WebLandingPageState extends State<WebLandingPage> {
 
             const SizedBox(height: Dimensions.paddingSizeLarge),
 
-            Container(
+            /*Container(
               height: 250,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(Dimensions.radiusDefault),
@@ -107,7 +107,7 @@ class _WebLandingPageState extends State<WebLandingPage> {
                   ),
                 ))),
               ]),
-            ),
+            ),*/
             const SizedBox(height: 20),
 
             Stack(children: [
@@ -264,7 +264,7 @@ class _WebLandingPageState extends State<WebLandingPage> {
             ]),
             const SizedBox(height: 40),
 
-            Text(
+            /*Text(
               splashController.landingModel?.fixedModuleTitle ?? '',
               style: robotoBold.copyWith(fontSize: Dimensions.fontSizeLarge, color: Theme.of(context).primaryColor),
             ),
@@ -272,9 +272,9 @@ class _WebLandingPageState extends State<WebLandingPage> {
               splashController.landingModel?.fixedModuleSubTitle ?? '',
               style: robotoRegular.copyWith(fontSize: Dimensions.fontSizeDefault, color: Theme.of(context).disabledColor),
             ),
-            const SizedBox(height: 40),
+            const SizedBox(height: 40),*/
 
-            GetBuilder<SplashController>(builder: (splashController) {
+            /*GetBuilder<SplashController>(builder: (splashController) {
               if(splashController.moduleList != null && _timer == null) {
                 _timer = Timer.periodic(const Duration(seconds: 5), (timer) {
                   int index = splashController.moduleIndex >= splashController.moduleList!.length-1 ? 0 : splashController.moduleIndex+1;
@@ -356,8 +356,8 @@ class _WebLandingPageState extends State<WebLandingPage> {
               ])) : const SizedBox();
             }),
             const SizedBox(height: 40),
-
-            Row(children: _generateChooseUsList(splashController)),
+*/
+            /*Row(children: _generateChooseUsList(splashController)),
             SizedBox(height: AppConstants.whyChooseUsList.isNotEmpty ? 40 : 0),
 
             RegistrationCardWidget(isStore: true, splashController: splashController),
@@ -409,8 +409,8 @@ class _WebLandingPageState extends State<WebLandingPage> {
               ]),
             ]) : const SizedBox(),
             const SizedBox(height: 40),
-
-            RegistrationCardWidget(isStore: false, splashController: splashController),
+*/
+            //RegistrationCardWidget(isStore: false, splashController: splashController),
             const SizedBox(height: 40),
 
           ]);

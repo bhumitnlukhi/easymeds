@@ -107,7 +107,7 @@ class SearchScreenState extends State<SearchScreen> with TickerProviderStateMixi
                           hint: Get.find<SplashController>().configModel!.moduleConfig!.module!.showRestaurantText!
                               ? 'search_food_or_restaurant'.tr : 'search_item_or_store'.tr,
                           suffixIcon: searchController.searchHomeText!.isNotEmpty ? Icons.cancel : CupertinoIcons.search,
-                          iconColor: Theme.of(context).disabledColor,
+                          iconColor: Theme.of(context).primaryColor,
                           filledColor: Theme.of(context).colorScheme.surface,
                           onChanged: (text) {
                             _searchSuggestions(text);

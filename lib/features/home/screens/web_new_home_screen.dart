@@ -110,7 +110,7 @@ class _WebNewHomeScreenState extends State<WebNewHomeScreen> {
                   ),
                   const SizedBox(width: Dimensions.paddingSizeDefault),
 
-                  GetBuilder<StoreController>(
+                  /*GetBuilder<StoreController>(
                       builder: (storeController) {
                         return GetBuilder<FlashSaleController>(
                             builder: (flashController) {
@@ -122,7 +122,7 @@ class _WebNewHomeScreenState extends State<WebNewHomeScreen> {
                             }
                         );
                       }
-                  ),
+                  ),*/
                 ]),
 
                 const BadWeatherWidget(),
@@ -135,7 +135,7 @@ class _WebNewHomeScreenState extends State<WebNewHomeScreen> {
                 const Center(child: ContactButtons()),
 
 
-                _isLogin ?  WebVisitAgainView(fromFood: isFood) : const SizedBox(),
+               // _isLogin ?  WebVisitAgainView(fromFood: isFood) : const SizedBox(),
 
                 isPharmacy ? const WebBasicMedicineNearbyViewWidget()
                     : isShop ? const WebMostPopularItemViewWidget(isShop: true, isFood: false)

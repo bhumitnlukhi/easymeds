@@ -77,7 +77,8 @@ class _CategoriesWiseProductViewState extends State<CategoriesWiseProductView> {
             child: Text(widget.fromShop ? 'best_reviewed_products'.tr : 'basic_medicine_nearby'.tr, style: robotoBold.copyWith(fontSize: Dimensions.fontSizeLarge)),
           ),*/
 
-          Column(children: [
+          Column(
+              children: [
             catOneProducts.isNotEmpty ? Container(
               margin: const EdgeInsets.only(top: Dimensions.paddingSizeDefault),
               decoration: BoxDecoration(
@@ -95,7 +96,10 @@ class _CategoriesWiseProductViewState extends State<CategoriesWiseProductView> {
                         Text('${categories[1].name}', style: robotoBold.copyWith(fontSize: Dimensions.fontSizeLarge)),
                         InkWell(
                           onTap: () {
-                            Get.toNamed(RouteHelper.getCategoryRoute());
+                            // Get.toNamed(RouteHelper.getCategoryRoute());
+                            Get.toNamed(RouteHelper.getCategoryItemRoute(
+                              categories[1].id, categories[1].name!,
+                            ));
                           },
                           child: Text(
                             'view_more'.tr,
@@ -140,8 +144,9 @@ class _CategoriesWiseProductViewState extends State<CategoriesWiseProductView> {
                         Text('${categories[2].name}', style: robotoBold.copyWith(fontSize: Dimensions.fontSizeLarge)),
                         InkWell(
                           onTap: () {
-                            Get.toNamed(RouteHelper.getCategoryRoute());
-                          },
+                            Get.toNamed(RouteHelper.getCategoryItemRoute(
+                              categories[2].id, categories[2].name!,
+                            ));                          },
                           child: Text(
                             'view_more'.tr,
                             style: robotoMedium.copyWith(fontSize: Dimensions.fontSizeDefault, color: Theme.of(context).primaryColor,),
@@ -185,8 +190,9 @@ class _CategoriesWiseProductViewState extends State<CategoriesWiseProductView> {
                         Text('${categories[3].name}', style: robotoBold.copyWith(fontSize: Dimensions.fontSizeLarge)),
                         InkWell(
                           onTap: () {
-                            Get.toNamed(RouteHelper.getCategoryRoute());
-                          },
+                            Get.toNamed(RouteHelper.getCategoryItemRoute(
+                              categories[3].id, categories[3].name!,
+                            ));                          },
                           child: Text(
                             'view_more'.tr,
                             style: robotoMedium.copyWith(fontSize: Dimensions.fontSizeDefault, color: Theme.of(context).primaryColor,),
@@ -230,8 +236,9 @@ class _CategoriesWiseProductViewState extends State<CategoriesWiseProductView> {
                         Text('${categories[4].name}', style: robotoBold.copyWith(fontSize: Dimensions.fontSizeLarge)),
                         InkWell(
                           onTap: () {
-                            Get.toNamed(RouteHelper.getCategoryRoute());
-                          },
+                            Get.toNamed(RouteHelper.getCategoryItemRoute(
+                              categories[4].id, categories[4].name!,
+                            ));                          },
                           child: Text(
                             'view_more'.tr,
                             style: robotoMedium.copyWith(fontSize: Dimensions.fontSizeDefault, color: Theme.of(context).primaryColor,),
@@ -272,11 +279,12 @@ class _CategoriesWiseProductViewState extends State<CategoriesWiseProductView> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text('${categories[3].name}', style: robotoBold.copyWith(fontSize: Dimensions.fontSizeLarge)),
+                        Text('${categories[5].name}', style: robotoBold.copyWith(fontSize: Dimensions.fontSizeLarge)),
                         InkWell(
                           onTap: () {
-                            Get.toNamed(RouteHelper.getCategoryRoute());
-                          },
+                            Get.toNamed(RouteHelper.getCategoryItemRoute(
+                              categories[5].id, categories[5].name!,
+                            ));                          },
                           child: Text(
                             'view_more'.tr,
                             style: robotoMedium.copyWith(fontSize: Dimensions.fontSizeDefault, color: Theme.of(context).primaryColor,),
@@ -303,6 +311,22 @@ class _CategoriesWiseProductViewState extends State<CategoriesWiseProductView> {
                 ],
               ),
             ) : const SizedBox(),
+            const SizedBox(height: 10,),
+            InkWell(
+              onTap: () {
+                Get.toNamed(RouteHelper.getCategoryRoute());
+              },
+              child: Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(Dimensions.radiusDefault),
+                  color: Theme.of(context).primaryColor,
+                ),
+                padding: const EdgeInsets.symmetric(vertical: Dimensions.paddingSizeSmall, horizontal: Dimensions.paddingSizeLarge),
+                child: Text(
+                  'view_more'.tr, style: robotoMedium.copyWith(color: Theme.of(context).cardColor),
+                ),
+              ),
+            ),
             const SizedBox(height: 15,)
           ]),
 

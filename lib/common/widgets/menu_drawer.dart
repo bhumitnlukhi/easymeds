@@ -124,7 +124,7 @@ class MenuDrawerState extends State<MenuDrawer> with SingleTickerProviderStateMi
         Get.toNamed(RouteHelper.getCareersRoute());
       }));
     }
-    if(Get.find<SplashController>().configModel!.toggleStoreRegistration!) {
+    /*if(Get.find<SplashController>().configModel!.toggleStoreRegistration!) {
       _menuList.add(Menu(
         icon: Images.restaurantJoin, title: Get.find<SplashController>().configModel!.moduleConfig!.module!.showRestaurantText!
           ? 'join_as_a_restaurant'.tr : 'join_as_a_store'.tr,
@@ -133,7 +133,7 @@ class MenuDrawerState extends State<MenuDrawer> with SingleTickerProviderStateMi
           Get.toNamed(RouteHelper.getRestaurantRegistrationRoute());
         },
       ));
-    }
+    }*/
     _menuList.add(Menu(icon: Images.logOut, title: AuthHelper.isLoggedIn() ? 'logout'.tr : 'sign_in'.tr, onTap: () {
       Get.back();
       if(AuthHelper.isLoggedIn()) {

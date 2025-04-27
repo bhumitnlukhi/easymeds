@@ -194,82 +194,89 @@ class _ChatScreenState extends State<ChatScreen> {
                         ) : const SizedBox();
                       }),
 
-                      Row(children: [
-
-                        InkWell(
-                          onTap: () async {
-                            Get.find<ChatController>().pickImage(false);
-                          },
-                          child: Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: Dimensions.paddingSizeDefault),
-                            child: Image.asset(Images.image, width: 25, height: 25, color: Theme.of(context).hintColor),
-                          ),
+                      Container(
+                        decoration: BoxDecoration(
+                          border: Border.all(color: Theme.of(context).primaryColor,width: 2,),
+                          borderRadius: const BorderRadius.all(Radius.circular(12))
                         ),
+                        margin: const EdgeInsets.symmetric(horizontal: 5,vertical: 5),
+                        child: Row(children: [
 
-                        SizedBox(
-                          height: 25,
-                          child: VerticalDivider(width: 0, thickness: 1, color: Theme.of(context).hintColor),
-                        ),
-                        const SizedBox(width: Dimensions.paddingSizeDefault),
-
-                        Expanded(
-                          child: TextField(
-                            inputFormatters: [LengthLimitingTextInputFormatter(Dimensions.messageInputLength)],
-                            controller: _inputMessageController,
-                            textCapitalization: TextCapitalization.sentences,
-                            style: robotoRegular,
-                            keyboardType: TextInputType.multiline,
-                            maxLines: null,
-                            decoration: InputDecoration(
-                              border: InputBorder.none,
-                              hintText: 'type_here'.tr,
-                              hintStyle: robotoRegular.copyWith(color: Theme.of(context).hintColor, fontSize: Dimensions.fontSizeLarge),
-                            ),
-                            onSubmitted: (String newText) {
-                              if(newText.trim().isNotEmpty && !Get.find<ChatController>().isSendButtonActive) {
-                                Get.find<ChatController>().toggleSendButtonActivity();
-                              }else if(newText.isEmpty && Get.find<ChatController>().isSendButtonActive) {
-                                Get.find<ChatController>().toggleSendButtonActivity();
-                              }
-                            },
-                            onChanged: (String newText) {
-                              if(newText.trim().isNotEmpty && !Get.find<ChatController>().isSendButtonActive) {
-                                Get.find<ChatController>().toggleSendButtonActivity();
-                              }else if(newText.isEmpty && Get.find<ChatController>().isSendButtonActive) {
-                                Get.find<ChatController>().toggleSendButtonActivity();
-                              }
-                            },
-                          ),
-                        ),
-
-                        GetBuilder<ChatController>(builder: (chatController) {
-                          return chatController.isLoading ? const Padding(
-                            padding: EdgeInsets.symmetric(horizontal: Dimensions.paddingSizeDefault),
-                            child: SizedBox(height: 25, width: 25, child: CircularProgressIndicator()),
-                          ) : InkWell(
+                          InkWell(
                             onTap: () async {
-                              if(chatController.isSendButtonActive) {
-                                await chatController.sendMessage(
-                                  message: _inputMessageController.text, notificationBody: widget.notificationBody,
-                                  conversationID: widget.conversationID, index: widget.index,
-                                );
-                                _inputMessageController.clear();
-                              }else {
-                                showCustomSnackBar('write_something'.tr);
-                              }
+                              Get.find<ChatController>().pickImage(false);
                             },
                             child: Padding(
                               padding: const EdgeInsets.symmetric(horizontal: Dimensions.paddingSizeDefault),
-                              child: Image.asset(
-                                Images.send, width: 25, height: 25,
-                                color: chatController.isSendButtonActive ? Theme.of(context).primaryColor : Theme.of(context).hintColor,
-                              ),
+                              child: Image.asset(Images.image, width: 25, height: 25, color: Theme.of(context).hintColor),
                             ),
-                          );
-                        }
-                        ),
+                          ),
 
-                      ]),
+                          SizedBox(
+                            height: 25,
+                            child: VerticalDivider(width: 0, thickness: 1, color: Theme.of(context).hintColor),
+                          ),
+                          const SizedBox(width: Dimensions.paddingSizeDefault),
+
+                          Expanded(
+                            child: TextField(
+                              inputFormatters: [LengthLimitingTextInputFormatter(Dimensions.messageInputLength)],
+                              controller: _inputMessageController,
+                              textCapitalization: TextCapitalization.sentences,
+                              style: robotoRegular,
+                              keyboardType: TextInputType.multiline,
+                              maxLines: null,
+                              decoration: InputDecoration(
+                                border: InputBorder.none,
+                                hintText: 'type_here'.tr,
+                                hintStyle: robotoRegular.copyWith(color: Theme.of(context).hintColor, fontSize: Dimensions.fontSizeLarge),
+                              ),
+                              onSubmitted: (String newText) {
+                                if(newText.trim().isNotEmpty && !Get.find<ChatController>().isSendButtonActive) {
+                                  Get.find<ChatController>().toggleSendButtonActivity();
+                                }else if(newText.isEmpty && Get.find<ChatController>().isSendButtonActive) {
+                                  Get.find<ChatController>().toggleSendButtonActivity();
+                                }
+                              },
+                              onChanged: (String newText) {
+                                if(newText.trim().isNotEmpty && !Get.find<ChatController>().isSendButtonActive) {
+                                  Get.find<ChatController>().toggleSendButtonActivity();
+                                }else if(newText.isEmpty && Get.find<ChatController>().isSendButtonActive) {
+                                  Get.find<ChatController>().toggleSendButtonActivity();
+                                }
+                              },
+                            ),
+                          ),
+
+                          GetBuilder<ChatController>(builder: (chatController) {
+                            return chatController.isLoading ? const Padding(
+                              padding: EdgeInsets.symmetric(horizontal: Dimensions.paddingSizeDefault),
+                              child: SizedBox(height: 25, width: 25, child: CircularProgressIndicator()),
+                            ) : InkWell(
+                              onTap: () async {
+                                if(chatController.isSendButtonActive) {
+                                  await chatController.sendMessage(
+                                    message: _inputMessageController.text, notificationBody: widget.notificationBody,
+                                    conversationID: widget.conversationID, index: widget.index,
+                                  );
+                                  _inputMessageController.clear();
+                                }else {
+                                  showCustomSnackBar('write_something'.tr);
+                                }
+                              },
+                              child: Padding(
+                                padding: const EdgeInsets.symmetric(horizontal: Dimensions.paddingSizeDefault),
+                                child: Image.asset(
+                                  Images.send, width: 25, height: 25,
+                                  color: chatController.isSendButtonActive ? Theme.of(context).primaryColor : Theme.of(context).hintColor,
+                                ),
+                              ),
+                            );
+                          }
+                          ),
+
+                        ]),
+                      ),
                     ]),
                   ) : const SizedBox(),
                 ],

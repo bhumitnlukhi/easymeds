@@ -119,7 +119,7 @@ class _CareerScreenState extends State<CareerScreen> {
                       GetBuilder<CareerController>(
                         builder: (careerController) {
                           return CustomButton(
-                            fontSize: 12,
+                            fontSize: 16,
                             buttonText: careerController.selectedFileName != ''
                                 ? careerController.selectedFileName
                                 : 'Upload CV'.tr,
